@@ -22,8 +22,8 @@ namespace UnionFind
 		public:
 			UnionElement(int id);
 			~UnionElement();
-			void SetGroup(Group* group){ mGroup = group; }
-			void SetFather(UnionElement* f)
+			void setGroup(Group* group){ mGroup = group; }
+			void setFather(UnionElement* f)
 			{
 				mFather = f; 
 				if (f != 0)
@@ -32,11 +32,11 @@ namespace UnionFind
 				}
 			}
 
-			void SetValue(T* v){ mValue = v; }
+			void setValue(T* v){ mValue = v; }
 
-			typename UnionFind<T>::Group* GetGroup(){ return mGroup; }
-			typename UnionFind<T>::UnionElement* GetFather(){ return mFather; }
-			T* GetValue(){ return mValue; }
+			typename UnionFind<T>::Group* getGroup(){ return mGroup; }
+			typename UnionFind<T>::UnionElement* getFather(){ return mFather; }
+			T* getValue(){ return mValue; }
 
 		private:
 			int mId;
@@ -50,13 +50,13 @@ namespace UnionFind
 		class Group
 		{
 		public:
-			void SetRoot(UnionElement* elem);
-			void SetSize(int size){ mSize = size; }
-			void SetId(int id){ mId = id; }
+			void setRoot(UnionElement* elem);
+			void setSize(int size){ mSize = size; }
+			void setId(int id){ mId = id; }
 
-			UnionElement* GetRoot(){ return mRootElement; }
-			int GetSize(){ return mSize; }
-			int GetId(){ return mId; }
+			UnionElement* getRoot(){ return mRootElement; }
+			int getSize(){ return mSize; }
+			int getId(){ return mId; }
 
 			Group();
 			~Group();
@@ -71,19 +71,19 @@ namespace UnionFind
 		UnionFind(int groups);
 		~UnionFind();
 
-		void UpdateGroup(int elemId);
-		void UnionByRootElement(int elemA, int elemB);
-		int Find(int elemId);
+		void updateGroup(int elemId);
+		void unionByRootElement(int elemA, int elemB);
+		int find(int elemId);
 
 	private:
 		Group* mGroups;
 		UnionElement** mElements;
 		int mSize;
 
-		void FixElementOrder(UnionElement* a, UnionElement* b);
-		void UpdateElementOrder(UnionElement* smallE, UnionElement* bigE);
-		void Union(Group* groupA, Group* groupB);
-		void SwapValues(UnionElement* a, UnionElement* b);
+		void fixElementOrder(UnionElement* a, UnionElement* b);
+		void updateElementOrder(UnionElement* smallE, UnionElement* bigE);
+		void unionOp(Group* groupA, Group* groupB);
+		void swapValues(UnionElement* a, UnionElement* b);
 	};
 
 
@@ -108,13 +108,13 @@ namespace UnionFind
 
 	/********************************************** Group *********************************************/
 	template<typename T>
-	void UnionFind<T>::Group::SetRoot(UnionElement* elem)
+	void UnionFind<T>::Group::setRoot(UnionElement* elem)
 	{
 		mRootElement = elem;
 		if (elem != 0)
 		{
-			elem->SetFather(0);
-			elem->SetGroup(this);
+			elem->setFather(0);
+			elem->setGroup(this);
 		}
 		
 	}
@@ -139,28 +139,28 @@ namespace UnionFind
 		for (int i = 0; i < groups; ++i)
 		{
 			UnionElement* elem = new UnionElement(i);
-			mGroups[i].SetRoot(elem);
-			mGroups[i].SetId(i);
-			elem->SetGroup(&mGroups[i]);
+			mGroups[i].setRoot(elem);
+			mGroups[i].setId(i);
+			elem->setGroup(&mGroups[i]);
 			mElements[i] = elem;
 		}
 	}
 
 	template<typename T>
-	void UnionFind<T>::UpdateGroup(int elemId)
+	void UnionFind<T>::updateGroup(int elemId)
 	{
 		if (!inRange(elemId, 0, mSize))
 			throw std::invalid_argument("element id is out of range");
 	}
 
 	template<typename T>
-	void UnionFind<T>::UpdateElementOrder(UnionElement* smallE, UnionElement* bigE)
+	void UnionFind<T>::updateElementOrder(UnionElement* smallE, UnionElement* bigE)
 	{
 
 	}
 
 	template<typename T>
-	void UnionFind<T>::UnionByRootElement(int elemA, int elemB)
+	void UnionFind<T>::unionByRootElement(int elemA, int elemB)
 	{
 		if (!inRange(elemA, 0, mSize) || !inRange(elemB, 0, mSize))
 			throw std::invalid_argument("element id is out of range");
@@ -168,31 +168,31 @@ namespace UnionFind
 		UnionElement* elem1 = mElements[elemA];
 		UnionElement* elem2 = mElements[elemB];
 
-		if (elem1->GetFather() != 0 || elem2->GetFather() != 0 || elem1->GetGroup() == elem2->GetGroup())
+		if (elem1->getFather() != 0 || elem2->getFather() != 0 || elem1->getGroup() == elem2->getGroup())
 		{
 			throw std::invalid_argument("element is not a root");
 		}
 			
-		Union(elem1->GetGroup(), elem2->GetGroup());
+		unionOp(elem1->getGroup(), elem2->getGroup());
 	}
 
 
 	template<typename T>
-	void UnionFind<T>::FixElementOrder(UnionElement* a, UnionElement* b)
+	void UnionFind<T>::fixElementOrder(UnionElement* a, UnionElement* b)
 	{
 
 	}
 	template<typename T>
-	void UnionFind<T>::SwapValues(UnionElement* a, UnionElement* b)
+	void UnionFind<T>::swapValues(UnionElement* a, UnionElement* b)
 	{
 		T* temp;
-		temp = a->GetValue();
-		a->SetValue(b->GetValue());
-		b->SetValue(temp);
+		temp = a->getValue();
+		a->setValue(b->getValue());
+		b->setValue(temp);
 	}
 
 	template<typename T>
-	void UnionFind<T>::Union(Group* groupA, Group* groupB)
+	void UnionFind<T>::unionOp(Group* groupA, Group* groupB)
 	{
 		if (groupA == 0 || groupB == 0)
 			throw std::invalid_argument("group is null");
@@ -201,33 +201,33 @@ namespace UnionFind
 		Group *smallG = groupB;
 
 		//join small to big
-		if (smallG->GetSize() > bigG->GetSize())
+		if (smallG->getSize() > bigG->getSize())
 		{
 			bigG = groupB;
 			smallG = groupA;
 		}
 
-		bigG->SetSize(bigG->GetSize() + groupB->GetSize());
-		smallG->SetSize(0);
-		smallG->GetRoot()->SetGroup(0);
-		smallG->GetRoot()->SetFather(groupA->GetRoot());
+		bigG->setSize(bigG->getSize() + groupB->getSize());
+		smallG->setSize(0);
+		smallG->getRoot()->setGroup(0);
+		smallG->getRoot()->setFather(groupA->getRoot());
 
 		//fix order based on element value and move root down if needed
-		UnionElement * bigE = bigG->GetRoot();
-		UnionElement * smallE = smallG->GetRoot();
-		if (*bigE->GetValue() < *smallE->GetValue())
+		UnionElement * bigE = bigG->getRoot();
+		UnionElement * smallE = smallG->getRoot();
+		if (*bigE->getValue() < *smallE->getValue())
 		{
 			UnionElement * temp = bigE;
-			bigG->SetRoot(smallE);
-			bigE->SetFather(smallE);
+			bigG->setRoot(smallE);
+			bigE->setFather(smallE);
 			
 		}
-		FixElementOrder(smallG->GetRoot(), bigG->GetRoot());
-		smallG->SetRoot(0);
+		fixElementOrder(smallG->getRoot(), bigG->getRoot());
+		smallG->setRoot(0);
 	}
 
 	template<typename T>
-	int	UnionFind<T>::Find(int elemId)
+	int	UnionFind<T>::find(int elemId)
 	{
 		if (elemId < 0 || elemId >= mSize)
 			throw std::invalid_argument("element id is out of range");
@@ -236,18 +236,18 @@ namespace UnionFind
 		List<UnionElement*> findPath;
 		
 		//find root element of elemId
-		while (elem->GetFather() != 0)
+		while (elem->getFather() != 0)
 		{
 			findPath.insert(findPath.end(), elem);
-			elem = elem->GetFather();
+			elem = elem->getFather();
 		}
 
 		//flaten the tree
 		for (ListIter<UnionElement*> i = findPath.begin(); i != findPath.end(); ++i)
 		{
-			(*i)->SetFather(elem);
+			(*i)->setFather(elem);
 		}
-		return elem->GetGroup()->GetId();
+		return elem->getGroup()->getId();
 	}
 
 	template<typename T>
