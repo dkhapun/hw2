@@ -2,7 +2,7 @@
 using namespace std;
 #include "hash_table.h"
 
-int main()
+int main2()
 {
 int* p;
 HashTable<int> a;

@@ -121,7 +121,7 @@ bool HashTable<D>::insert(D const& data, unsigned int key)
 		Array<TableEntry>* ptemp = 
 			new Array<TableEntry>(newSize, emptyEnt);
 		/*rehash*/
-		for(int i=0; i<size; ++i)
+		for(unsigned int i=0; i<size; ++i)
 		{
 			insertArray((*parray)[i], ptemp);
 		}
