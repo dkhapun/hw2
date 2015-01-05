@@ -12,51 +12,54 @@ template <typename D>
 class HashTable
 {
 public:
-/*construct empty*/
-HashTable();
-/*construct copy*/
-HashTable(HashTable const& other);
-/*destruct*/
-~HashTable();
-/*assignment*/
-HashTable const& operator=(HashTable const& other);
-/*insert entry*/
-bool insert(D const& data, unsigned int key);
-/*find entry*/
-bool find(unsigned int key, D** ppdata);
-/*get size*/
-unsigned int getSize() const;
-#ifdef NDEBUG
-private:
-#endif
-/*struct for table entries*/
-enum EntryStat {ES_EMPTY, ES_FULL};
-struct TableEntry
-{
-	EntryStat stat;
-	unsigned int key;
-	D data;
 
-	#ifndef NDEBUG
-	friend ostream& operator<<(ostream& os, TableEntry const& a)
-	{
-		if(a.stat == ES_EMPTY)
-		{
-			os << "empty" << endl;
-		}
-		else
-		{
-			os << a.key << ":" << a.data << endl;
-		}
-	}
+	/*construct empty*/
+	HashTable();
+	/*construct copy*/
+	HashTable(HashTable const& other);
+	/*destruct*/
+	~HashTable();
+	/*assignment*/
+	HashTable const& operator=(HashTable const& other);
+	/*insert entry*/
+	bool insert(D const& data, unsigned int key);
+	/*find entry*/
+	bool find(unsigned int key, D** ppdata);
+	/*get size*/
+	unsigned int getSize() const;
+	
+	#ifdef NDEBUG
+	private:
 	#endif
-};
+	
+	/*struct for table entries*/
+	enum EntryStat {ES_EMPTY, ES_FULL};
+	struct TableEntry
+	{
+		EntryStat stat;
+		unsigned int key;
+		D data;
 
-Array<TableEntry>* parray; /*pointer to array*/
-unsigned int n; /*table size*/
+		#ifndef NDEBUG
+		friend ostream& operator<<(ostream& os, TableEntry const& a)
+		{
+			if(a.stat == ES_EMPTY)
+			{
+				os << "empty" << endl;
+			}
+			else
+			{
+				os << a.key << ":" << a.data << endl;
+			}
+		}
+		#endif
+	};
 
-static unsigned int hash(unsigned int x, unsigned int n); /*hashing function*/
-void insertArray(TableEntry const& entry, Array<TableEntry>* parr); /*used in insert*/
+	Array<TableEntry>* parray; /*pointer to array*/
+	unsigned int n; /*table size*/
+	
+	static unsigned int hash(unsigned int x, unsigned int n); /*hashing function*/
+	void insertArray(TableEntry const& entry, Array<TableEntry>* parr); /*used in insert*/
 };
 
 /*implementation

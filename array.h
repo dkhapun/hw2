@@ -9,46 +9,54 @@ using namespace std;
 template <typename D>
 class Array
 {
-public:
-/*construct array of given size, init value*/
-Array(unsigned int in_n, D const& in_init = 0);
-/*construct copy*/
-Array(Array const& other);
-/*destruct*/
-~Array();
-/*assignment*/
-Array const& operator=(Array const& other);
-/*operator []*/
-D& operator[](unsigned int i);
-/*operator [] const*/
-D const& operator[](unsigned int i) const;
-/*get size*/
-unsigned int getSize() const;
-#ifndef NDEBUG
-friend ostream& operator<<(ostream& os, Array const& a)
-{
-	os << "array size: " << a.n << endl;
-	os << "init members: " << a.nstack << endl;
-	os << "init value: " << a.init;
-	os << "members:" << endl;
-	for(unsigned int i=0; i<a.n; ++i)
+	public:
+	
+	/*construct array of given size, init value*/
+	Array(unsigned int in_n, D const& in_init = 0);
+
+	/*construct copy*/
+	Array(Array const& other);
+
+	/*destruct*/
+	~Array();
+
+	/*assignment*/
+	Array const& operator=(Array const& other);
+
+	/*operator []*/
+	D& operator[](unsigned int i);
+
+	/*operator [] const*/
+	D const& operator[](unsigned int i) const;
+
+	/*get size*/
+	unsigned int getSize() const;
+
+	#ifndef NDEBUG
+	friend ostream& operator<<(ostream& os, Array const& a)
 	{
-		os << a.pdata_array[i];
+		os << "array size: " << a.n << endl;
+		os << "init members: " << a.nstack << endl;
+		os << "init value: " << a.init;
+		os << "members:" << endl;
+		for(unsigned int i=0; i<a.n; ++i)
+		{
+			os << a.pdata_array[i];
+		}
 	}
-}
-#endif
+	#endif
 
-#ifdef NDEBUG
-private:
-#endif
-unsigned int n; /*array size*/
-D* pdata_array; /*pointer to data array*/
-unsigned int* pindex_array; /*pointer to array of stack indexes*/
-unsigned int* pstack_array; /*pointer to stack*/
-unsigned int nstack; /*number of members in stack*/
-D init; /*initial value*/
+	#ifdef NDEBUG
+	private:
+	#endif
+	unsigned int n; /*array size*/
+	D* pdata_array; /*pointer to data array*/
+	unsigned int* pindex_array; /*pointer to array of stack indexes*/
+	unsigned int* pstack_array; /*pointer to stack*/
+	unsigned int nstack; /*number of members in stack*/
+	D init; /*initial value*/
 
-void copyOther(Array const& other); /*for copy and assignment*/
+	void copyOther(Array const& other); /*for copy and assignment*/
 };
 
 /*implementation
@@ -115,12 +123,12 @@ void Array<D>::copyOther(Array const& other)
 	n = other.n;
 	/*copy stack*/
 	nstack = other.nstack;
-	for(int i=0; i<other.nstack; ++i)
+	for(unsigned int i=0; i<other.nstack; ++i)
 	{
 		pstack_array[i] = other.pstack_array[i];
 	}
 	/*copy index array and data*/
-	for(int i=0; i<other.nstack; ++i)
+	for (unsigned int i = 0; i<other.nstack; ++i)
 	{
 		unsigned int j = pstack_array[i];
 		pindex_array[j] = other.pindex_array[j];

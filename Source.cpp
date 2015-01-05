@@ -5,19 +5,19 @@ using namespace std;
 
 void main()
 {
-	UnionFind::UnionFind<int> u(10);
+	UnionFind<int> u(10);
 	cout << u.find(6) <<endl;
 	cout << u.find(3) <<endl;
 	cout << u.find(8) <<endl;
 
 	try{
-		u.unionByRootElement(2, 9);
-		u.unionByRootElement(9, 4);
-		u.unionByRootElement(5, 6); 
-		u.unionByRootElement(2, 9);
-		u.unionByRootElement(4, 4);
-		u.unionByRootElement(7, 7);
-		u.unionByRootElement(8, 8);
+		u.unionByElement(2, 9);
+		u.unionByElement(9, 4);
+		u.unionByElement(5, 6); 
+		u.unionByElement(2, 9);
+		u.unionByElement(4, 4);
+		u.unionByElement(7, 7);
+		u.unionByElement(8, 8);
 	}
 	catch (std::exception & e)
 	{
