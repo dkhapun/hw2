@@ -40,7 +40,7 @@ namespace avl_tree
 
 			n = AVLTree < RankNode<T>, int>::rr_rotation(n);
 
-			n->mdata->rank = brank;
+			n->mdata->rank = a_rank;
 			n->left->mdata->rank = 1 + bl_rank + al_rank;
 			return n;
 		}
@@ -54,7 +54,7 @@ namespace avl_tree
 			
 			n = AVLTree < RankNode<T>, int>::ll_rotation(n);
 			
-			n->mdata->rank = brank;
+			n->mdata->rank = b_rank;
 			n->right->mdata->rank = 1 + ar_rank + br_rank;
 			return n;
 		}
