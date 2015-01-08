@@ -254,6 +254,6 @@ UnionFind<T>::~UnionFind()
 	for (int i = 0; i < mSize; i++)
 	{
 		delete mElements[i];
-		delete[] mGroups;
 	}
+	delete[] mGroups;
 }

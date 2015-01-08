@@ -79,17 +79,22 @@ namespace avl_tree
 		void forEachInorderReverse(Do& callback);
 		void operator=(const AVLTree<V, K>& cpy);
 
-	private:
-		AVLNode<V> *balance(AVLNode<V> *);
-		AVLNode<V> *insert(AVLNode<V> *, V , AVLNode<V> **inserted);
-		AVLNode<V> *find(AVLNode<V> * root, K key);
-		AVLNode<V> *remove(AVLNode<V> * root, K key);
-		
-		AVLNode<V> *rr_rotation(AVLNode<V> *);
-		AVLNode<V> *ll_rotation(AVLNode<V> *);
-		AVLNode<V> *lr_rotation(AVLNode<V> *);
-		AVLNode<V> *rl_rotation(AVLNode<V> *);
+	protected:
+		virtual AVLNode<V> *balance(AVLNode<V> *);
+		virtual AVLNode<V> *insert(AVLNode<V> *, V , AVLNode<V> **inserted);
+		virtual AVLNode<V> *find(AVLNode<V> * root, K key);
+		virtual AVLNode<V> *remove(AVLNode<V> * root, K key);
 
+		virtual void updateRemoveNode(AVLNode<V> *root){}
+		virtual void updateInsertNode(AVLNode<V> *root){}
+		virtual void updateNodeValue(AVLNode<V> *node, V* tval);
+
+		virtual AVLNode<V> *rr_rotation(AVLNode<V> *);
+		virtual AVLNode<V> *ll_rotation(AVLNode<V> *);
+		virtual AVLNode<V> *lr_rotation(AVLNode<V> *);
+		virtual AVLNode<V> *rl_rotation(AVLNode<V> *);
+
+	private:
 		int height(AVLNode<V> *);
 		int diff(AVLNode<V> *);
 		void updateMinMax();
@@ -120,6 +125,7 @@ namespace avl_tree
 		AVLNode<V>* mMax;
 		AVLNode<V>* mMin;
 		int msize;
+
 	public:
 		/*construct empty*/
 		AVLTree();
@@ -129,7 +135,7 @@ namespace avl_tree
 		AVLTree(const AVLTree<V,K>& cpy);
 
 		/*destruct*/
-		~AVLTree();
+		virtual ~AVLTree();
 		
 	};
 
@@ -437,6 +443,7 @@ AVLNode<V> *AVLTree<V, K>::insert(AVLNode<V> *root, V value, AVLNode<V> **insert
 		if (((tmp = insert(root->left, value, inserted)) == 0))
 			return 0;
 		root->left = tmp;
+		updateInsertNode(root);
 		root = balance(root);
 	}
 	else if ((K) (value) > (K) (*(root->mdata)))
@@ -444,6 +451,7 @@ AVLNode<V> *AVLTree<V, K>::insert(AVLNode<V> *root, V value, AVLNode<V> **insert
 		if (((tmp = insert(root->right, value, inserted)) == 0))
 			return 0;
 		root->right = tmp;
+		updateInsertNode(root);
 		root = balance(root);
 	}
 	else if ((K) (value) == (K) (*(root->mdata)))
@@ -453,6 +461,7 @@ AVLNode<V> *AVLTree<V, K>::insert(AVLNode<V> *root, V value, AVLNode<V> **insert
 
 	return root;
 }
+
 template<typename V, typename K>
 V* AVLTree<V, K>::insert(V value)
 {
@@ -554,25 +563,36 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 			AVLNode<V> * mind = findMin(toremove->right);
 			V* tval = new V(*mind->mdata);
 			remove(mRoot, (K)(*tval));
+			updateNodeValue(toremove, tval);
 			toremove->mdata = tval;
 		}
 		return toremove;
 	}
 	else if ((K)(value) < (K)(*(root->mdata)))
 	{
-		toremove = remove(root->left, value);
+		toremove = remove(root->left, value)
 	}
 	else if ((K)(value) > (K)((*root->mdata)))
 	{
-		toremove = remove(root->right, value);
+		toremove = remove(root->right, value)	
 	}
 	if (toremove != 0)
 	{
+		updateRemoveNode(root);
 		root = balance(root);
 		delete toremove;
 	}
 	return root;
 }
+
+template<typename V, typename K>
+void AVLTree<V, K>::updateNodeValue(AVLNode<V> * node, V* tval)
+{
+	if (node->mdata != 0)
+		delete node->mdata;
+	node->mdata = tval;
+}
+
 template<typename V, typename K>
 void AVLTree<V, K>::remove(K value)
 {
