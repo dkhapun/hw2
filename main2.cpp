@@ -1,3 +1,5 @@
+#ifdef deletemelater
+
 /***************************************************************************/
 /*                                                                         */
 /* 234218 Data DSs 1, Winter 2014-2015                                          */
@@ -348,6 +350,8 @@ static errorType OnQuit(void** DS, const char* const command) {
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 
