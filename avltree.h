@@ -570,11 +570,11 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 	}
 	else if ((K)(value) < (K)(*(root->mdata)))
 	{
-		toremove = remove(root->left, value)
+		toremove = remove(root->left, value);
 	}
 	else if ((K)(value) > (K)((*root->mdata)))
 	{
-		toremove = remove(root->right, value)	
+		toremove = remove(root->right, value);
 	}
 	if (toremove != 0)
 	{

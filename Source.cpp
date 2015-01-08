@@ -1,11 +1,13 @@
 #include <iostream>
-#include "UnionFind.h"
+#include "PlanetUnion.h"
+#include "RankTree.h"
 
 using namespace std;
+using namespace avl_tree;
 
 void main()
 {
-	UnionFind<int> u(10);
+	PlanetUnion u(10);
 	cout << u.find(6) <<endl;
 	cout << u.find(3) <<endl;
 	cout << u.find(8) <<endl;
@@ -33,4 +35,7 @@ void main()
 	cout << u.find(8) << endl;
 	cout << u.find(9) << endl;
 
+	RankTree<City> rtree;
+
+	
 }
