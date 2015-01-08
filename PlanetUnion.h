@@ -9,7 +9,5 @@ public:
 	void unionByRootElement(int elemA, int elemB);
 
 	~PlanetUnion();
-
-	
 };
 

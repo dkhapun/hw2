@@ -5,7 +5,7 @@
 using namespace std;
 using namespace avl_tree;
 
-void main()
+void test_uf()
 {
 	PlanetUnion u(10);
 	cout << u.find(6) <<endl;
