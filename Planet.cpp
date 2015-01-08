@@ -25,8 +25,10 @@ Planet::~Planet()
  */
 StatusType Planet::AddCitizen(int citizenID)
 {
-
-
+	if(!citizensTable.insert(0, citizenID))
+	{
+		return FAILURE;
+	}
 	return SUCCESS;
 }
 
