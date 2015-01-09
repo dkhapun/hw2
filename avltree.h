@@ -59,7 +59,7 @@ namespace avl_tree
 		/*check if empty*/
 		bool empty();
 		/*insert new value to the tree*/
-		V* insert(V);
+		virtual V* insert(V);
 		/*remove value from the tree, by its key*/
 		void remove(K);
 		/*print out the values ordered like a tree*/

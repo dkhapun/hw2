@@ -35,7 +35,24 @@ void test_uf()
 	cout << u.find(8) << endl;
 	cout << u.find(9) << endl;
 
-	RankTree<City> rtree;
+	RankTree<int> rtree;
+	rtree.insert(2);
+	rtree.insert(10);
+	rtree.insert(4);
+	rtree.insert(15);
+	rtree.insert(16);
+	rtree.insert(3);
+	rtree.insert(7);
+	rtree.insert(11);
+
+	rtree.display(1);
+
+	cout << (int)*rtree.rank(1);
+	cout << (int)*rtree.rank(2);
+	cout << (int)*rtree.rank(3);
+	cout << (int)*rtree.rank(4);
+	cout << (int)*rtree.rank(5);
+	cout << (int)*rtree.rank(6);
 
 	
 }

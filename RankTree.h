@@ -8,6 +8,7 @@ namespace avl_tree
 	{
 	public:
 		RankNode() : value(0), rank(0){}
+		RankNode(T* v) : value(v), rank(0){}
 		operator int() { return (int)(*value); }
 		T* value;
 		int rank;
@@ -24,6 +25,8 @@ namespace avl_tree
 
 		}
 
+		T* select(int k);
+		void insert(T num);
 	protected:
 
 		virtual void updateRemoveNode(AVLNode<RankNode<T> > *root);
@@ -81,6 +84,11 @@ namespace avl_tree
 	}
 
 	template<typename V>
+	void RankTree<V>::insert(V num)
+	{
+		insert(RankNode<V>(new V(num)));
+	}
+	template<typename V>
 	void RankTree<V>::updateNodeValue(AVLNode<RankNode<V> > * node, V* tval)
 	{
 		if (node->mdata != 0 && node->mdata->value != 0)
@@ -99,29 +107,22 @@ namespace avl_tree
 	 {
 		 ++(root->mdata->rank);
 	 }
-	 /*
+
 	 template<typename V>
-	 AVLNode<RankNode<V> >* RankTree<V>::*rr_rotation(AVLNode<RankNode<V> > *n)
+	 V* RankTree<V>::select(int k)
 	 {
-		 return n;
+		 select(mRoot, k);
 	 }
-/*
+
 	 template<typename V>
-	 AVLNode<RankNode<V> >* RankTree<V>::*ll_rotation(AVLNode<RankNode<V> > *n)
+	 V* RankTree<V>::select(AVLNode<RankNode<V> >* node, int k)
 	 {
-		 return n;
+		 if (node->left->mdata->rank == k - 1)
+			 return node->mdata->value;
+		 if (node->left->mdata->rank < k - 1)
+			 return select(node->right, k);
+		 if (node->left->mdata->rank > k - 1)
+			 return select(node->left, k);
 	 }
-	 
-	 template<typename V>
-	 AVLNode<RankNode<V> >* RankTree<V>::*lr_rotation(AVLNode<RankNode<V> > *n)
-	 {
-		 return n;
-	 }
-	 
-	 template<typename V>
-	 AVLNode<RankNode<V> >* RankTree<V>::*rl_rotation(AVLNode<RankNode<V> > *n)
-	 {
-		 return n;
-	 }
-*/
+
 }

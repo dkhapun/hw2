@@ -65,8 +65,15 @@ StatusType Planet::MoveToCity(int citizenID, int city)
  */
 StatusType Planet::JoinKingdoms(int city1, int city2)
 {
-
-
+	try
+	{
+		this->planetUnion.unionByRootElement(city1, city2);
+	}
+	catch (std::exception & e)
+	{
+		e.what();
+		return FAILURE;
+	}
 	return SUCCESS;
 }
 
@@ -85,8 +92,10 @@ StatusType Planet::JoinKingdoms(int city1, int city2)
  */
 StatusType Planet::GetCapital(int citizenID, int* capital)
 {
-
-
+	int* data = 0;
+	if (false == this->citizensTable.find(citizenID, &data))
+		return FAILURE;
+	int cityid = planetUnion.find(*data);
 	return SUCCESS;
 }
 
@@ -103,7 +112,7 @@ StatusType Planet::SelectCity(int k, int* city)
 {
 	if (k < 0)
 		return INVALID_INPUT;
-	*city = *(citiesTree.rank(k));
+	*city = *(citiesTree.select(k));
 	if (city == 0)
 		return FAILURE;
 	return SUCCESS;
