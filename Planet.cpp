@@ -21,7 +21,7 @@ Planet::~Planet()
  * Input:         citizenID - The ID of the citizen.
  * Output:        None.
  * Return Values: ALLOCATION_ERROR - In case of an allocation error.
- *                INVALID_INPUT - If DS==NULL or citizenID<0.
+ *                INVALID_INPUT - If citizenID<0.
  *                FAILURE - If a citizen with citizenID already lives in the planet, or in the case of any other problem.
  *                SUCCESS - Otherwise.
  */
@@ -40,7 +40,7 @@ StatusType Planet::AddCitizen(int citizenID)
  *                city - The ID of the city.
  * Output:        None.
  * Return Values: ALLOCATION_ERROR - In case of an allocation error.
- *                INVALID_INPUT - If DS==NULL, citizenID<0 or city is not an illegal city number.
+ *                INVALID_INPUT - If citizenID<0 or city is not an illegal city number.
  *                FAILURE - If a citizen with same ID already lives in a city,there is no citizen in the planet with this ID or in case of any other error.
  *                SUCCESS - Otherwise.
  */
@@ -59,7 +59,7 @@ StatusType Planet::MoveToCity(int citizenID, int city)
  *                city2 - The identifier of the 2nd city.
  * Output:        None.
  * Return Values: ALLOCATION_ERROR - In case of an allocation error.
- *                INVALID_INPUT - If DS==NULL or either city2 or city1 are illegal city numbers.
+ *                INVALID_INPUT - If either city2 or city1 are illegal city numbers.
  *                FAILURE - If either cities is not a kingdom capital, both cities belong to the same capital, or in case of any other error.
  *                SUCCESS - Otherwise.
  */
@@ -86,7 +86,7 @@ StatusType Planet::JoinKingdoms(int city1, int city2)
  *                smallest index will be chosen.
  * Input:         citizenID - The identifier of the citizen.
  * Output:        capital - The identifier of the capital city.
- * Return Values: INVALID_INPUT - If DS==NULL, citizenID<0 or capital==NULL.
+ * Return Values: INVALID_INPUT - If citizenID<0 or capital==NULL.
  *                FAILURE - If there is no citizen in the planet with this ID or in case of any other error.
  *                SUCCESS - Otherwise.
  */
@@ -104,7 +104,7 @@ StatusType Planet::GetCapital(int citizenID, int* capital)
 /* Description:   Returns the city ranked in the k-th place when all the cities in the planet are ordered by size.
  * Input:         k - The rank.
  * Output:        city - The identifier of the k-th city.
- * Return Values: INVALID_INPUT - If DS==NULL, k<0 or city==NULL.
+ * Return Values: INVALID_INPUT - If k<0 or city==NULL.
  *                FAILURE - If there is no city in the required rank or in case of any other error.
  *                SUCCESS - Otherwise.
  */
@@ -123,7 +123,7 @@ StatusType Planet::SelectCity(int k, int* city)
 /* Description:   Returns an array of the cities in the capital ranked by size.
  * Output:        results - An array of size n where the cities will be written.
  * Return Values: ALLOCATION_ERROR - In case of an allocation error.
- *                INVALID_INPUT - If DS==NULL or results==NULL.
+ *                INVALID_INPUT - If results==NULL.
  *                FAILURE - In case of an error.
  *                SUCCESS - Otherwise.
  */
