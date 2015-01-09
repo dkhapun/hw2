@@ -6,9 +6,10 @@ using namespace avl_tree;
  * Input:         n - Number of cities in the planet.
  * May throw an exception.
  */
-Planet::Planet(int n)
-:planetUnion(n)
+Planet::Planet(int in_n)
+:planetUnion(in_n)
 {
+	n = in_n;
 }
 
 /* Description:   Destruct
@@ -46,8 +47,19 @@ StatusType Planet::AddCitizen(int citizenID)
  */
 StatusType Planet::MoveToCity(int citizenID, int city)
 {
-
-
+	/*check input*/
+	if(citizenID<0 || city<0 || city>(n-1)) return INVALID_INPUT;
+	/*find citizen*/
+	int* pcity;
+	if(!citizensTable.find(citizenID, &pcity)) return FAILURE; //citizen not found
+	if(*pcity != 0) return FAILURE; //already in a city
+	/*set city*/
+	*pcity = city;
+	/*check if need to update capital in the union find*/
+	//planetUnion.???
+	/*remove city from rank tree*/
+	//citiesTree.???
+	/*insert back with new size*/
 	return SUCCESS;
 }
 
@@ -71,7 +83,7 @@ StatusType Planet::JoinKingdoms(int city1, int city2)
 	}
 	catch (std::exception & e)
 	{
-		e.what();
+		//e.what();
 		return FAILURE;
 	}
 	return SUCCESS;

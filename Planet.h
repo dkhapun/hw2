@@ -19,7 +19,7 @@ public:
 	 * Input:         n - Number of cities in the planet.
 	 * May throw an exception.
 	 */
-	Planet(int n);
+	Planet(int in_n);
 	
 	/* Description:   Destruct
 	 */
@@ -95,6 +95,8 @@ public:
 	StatusType   GetCitiesBySize(int results[]);
 
 private:
+	int n; //number of cities
+
 	HashTable<int> citizensTable;
 	PlanetUnion planetUnion;
 	avl_tree::RankTree<City> citiesTree;
