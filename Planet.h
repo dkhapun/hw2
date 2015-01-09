@@ -8,7 +8,7 @@ using namespace std;
 #include "library2.h"
 #include "hash_table.h"
 #include "PlanetUnion.h"
-#include "avltree.h"
+#include "RankTree.h"
 #include "City.h"
 
 class Planet
@@ -97,5 +97,5 @@ public:
 private:
 	HashTable<int> citizensTable;
 	PlanetUnion planetUnion;
-	avl_tree::AVLTree<City, int> citiesTree;
+	avl_tree::RankTree<City> citiesTree;
 };

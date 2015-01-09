@@ -1,5 +1,7 @@
 #include "Planet.h"
 
+using namespace avl_tree;
+
 /* Description:   Construct
  * Input:         n - Number of cities in the planet.
  * May throw an exception.
@@ -99,8 +101,11 @@ StatusType Planet::GetCapital(int citizenID, int* capital)
  */
 StatusType Planet::SelectCity(int k, int* city)
 {
-
-
+	if (k < 0)
+		return INVALID_INPUT;
+	*city = *(citiesTree.rank(k));
+	if (city == 0)
+		return FAILURE;
 	return SUCCESS;
 }
 
@@ -115,6 +120,23 @@ StatusType Planet::SelectCity(int k, int* city)
  */
 StatusType Planet::GetCitiesBySize(int results[])
 {
+	class AddElementToArray
+	{
+	public:
+		AddElementToArray(int* results) : i(0), mResult(results) {}
+		void operator()(RankNode<City>& data)
+		{
+			mResult[i] = (int) data.value;
+			i++;
+		}
+		int i;
+		int* mResult;
+	};
+
+	if (results == 0)
+		return INVALID_INPUT;
+
+	citiesTree.forEachInorder(AddElementToArray(results));
 
 
 	return SUCCESS;
