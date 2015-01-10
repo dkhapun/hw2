@@ -159,7 +159,7 @@ namespace avl_tree
 	 template<typename V>
 	 V* RankTree<V>::select(int k)
 	 {
-		 return select(mRoot, k);
+		 return select(this->mRoot, k);
 	 }
 
 	 template<typename V>

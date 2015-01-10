@@ -107,7 +107,8 @@ StatusType Planet::GetCapital(int citizenID, int* capital)
 	int* data = 0;
 	if (false == this->citizensTable.find(citizenID, &data))
 		return FAILURE;
-	int cityid = planetUnion.find(*data);
+	int groupid = planetUnion.find(*data);
+	*capital = planetUnion.getCapitalOfGroup(groupid);
 	return SUCCESS;
 }
 
@@ -130,7 +131,18 @@ StatusType Planet::SelectCity(int k, int* city)
 	return SUCCESS;
 }
 
-
+class AddElementToArray
+{
+public:
+	AddElementToArray(int* results) : i(0), mResult(results) {}
+	void operator()(const RankNode<City>& data)
+	{
+		mResult[i] = (int) (*data.value);
+		i++;
+	}
+	int i;
+	int* mResult;
+};
 
 /* Description:   Returns an array of the cities in the capital ranked by size.
  * Output:        results - An array of size n where the cities will be written.
@@ -141,23 +153,12 @@ StatusType Planet::SelectCity(int k, int* city)
  */
 StatusType Planet::GetCitiesBySize(int results[])
 {
-	class AddElementToArray
-	{
-	public:
-		AddElementToArray(int* results) : i(0), mResult(results) {}
-		void operator()(RankNode<City>& data)
-		{
-			mResult[i] = (int) data.value;
-			i++;
-		}
-		int i;
-		int* mResult;
-	};
+
 
 	if (results == 0)
 		return INVALID_INPUT;
-
-	citiesTree.forEachInorder(AddElementToArray(results));
+	AddElementToArray func = AddElementToArray(results);
+	citiesTree.forEachInorder(func);
 
 
 	return SUCCESS;

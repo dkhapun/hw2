@@ -41,3 +41,12 @@ void PlanetUnion::updateCity(int cityId, int change)
 		temp->setFather(elem1);
 	}
 }
+
+int PlanetUnion::getCapitalOfGroup(int g)
+{
+	if(mGroups[g].getSize() > 0)
+		return mGroups[g].getRoot()->getId();
+	else
+		return -1;
+
+}

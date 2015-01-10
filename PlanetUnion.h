@@ -8,6 +8,7 @@ public:
 
 	void unionByRootElement(int elemA, int elemB);
 	void updateCity(int id, int change);
+	int getCapitalOfGroup(int g);
 	~PlanetUnion();
 };
 

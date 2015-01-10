@@ -36,6 +36,7 @@ protected:
 		typename UnionFind<T>::Group* getGroup(){ return mGroup; }
 		typename UnionFind<T>::UnionElement* getFather(){ return mFather; }
 		T* getValue(){ return mValue; }
+		int getId(){return mId;}
 
 	private:
 		int mId;
