@@ -7,7 +7,7 @@ public:
 	PlanetUnion(int citys);
 
 	void unionByRootElement(int elemA, int elemB);
-
+	void updateCity(int id, int change);
 	~PlanetUnion();
 };
 

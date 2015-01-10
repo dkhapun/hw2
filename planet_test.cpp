@@ -46,12 +46,13 @@ int main()
 
 	rtree.display(1);
 
-	cout << (int) *rtree.select(1);
-	cout << (int) *rtree.select(2);
-	cout << (int) *rtree.select(3);
-	cout << (int) *rtree.select(4);
-	cout << (int) *rtree.select(5);
-	cout << (int) *rtree.select(6);
-
+	cout << endl << (int) *rtree.select(1);
+	cout << endl << (int) *rtree.select(2);
+	cout << endl << (int) *rtree.select(3);
+	cout << endl << (int) *rtree.select(4);
+	cout << endl << (int) *rtree.select(5);
+	cout << endl << (int) *rtree.select(6);
+	cout << endl << (int) *rtree.select(7);
+	cout << endl << (int) *rtree.select(8);
 	return 0;
 }

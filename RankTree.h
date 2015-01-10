@@ -114,7 +114,7 @@ namespace avl_tree
 		}
 
 	private:
-
+		int getRank(AVLNode<RankNode<T> >* node);
 	};
 
 	template<typename V>
@@ -163,14 +163,19 @@ namespace avl_tree
 	 }
 
 	 template<typename V>
+	 int RankTree<V>::getRank(AVLNode<RankNode<V> >* node)
+	 {
+		 if (node == 0)
+			 return 0;
+		 return node->mdata->rank;
+	 }
+	 template<typename V>
 	 V* RankTree<V>::select(AVLNode<RankNode<V> >* node, int k)
 	 {
-		 if (node->left == 0)
-			 return 0;
-		 if (node->left->mdata->rank == k - 1)
+		 if (getRank(node->left) == k - 1)
 			 return node->mdata->value;
-		 if (node->left->mdata->rank < k - 1)
-			 return select(node->right, k - 1 - node->left->mdata->rank);
+		 if (getRank(node->left) < k - 1)
+			 return select(node->right, k - 1 - getRank(node->left));
 		 //if (node->left->mdata->rank > k - 1)
 			 return select(node->left, k);
 	 }

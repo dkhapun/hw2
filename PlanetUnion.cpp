@@ -26,3 +26,18 @@ void PlanetUnion::unionByRootElement(int elemA, int elemB)
 
 	unionOp(elem1->getGroup(), elem2->getGroup());
 }
+void PlanetUnion::updateCity(int cityId, int change)
+{
+	int cgroup = find(cityId);
+	UnionElement* elem1 = mElements[cityId];
+	elem1->getValue()->changePopulation(change);
+
+	//need to update capital
+	if (*(mGroups[cgroup].getRoot()->getValue()) < *(elem1->getValue()))
+	{
+		UnionElement* temp = mGroups[cgroup].getRoot();
+		elem1->setGroup(&(mGroups[cgroup]));
+		mGroups[cgroup].setRoot(elem1);
+		temp->setFather(elem1);
+	}
+}
