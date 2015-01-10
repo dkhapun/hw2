@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <sstream>
 #include <stdexcept>
 #include <iostream>
 #include <algorithm>
@@ -85,6 +87,7 @@ namespace avl_tree
 		virtual AVLNode<V> *find(AVLNode<V> * root, K key);
 		virtual AVLNode<V> *remove(AVLNode<V> * root, K key);
 
+		virtual std::string nodeToString(const V& node) const;
 		virtual void updateRemoveNode(AVLNode<V> *root){}
 		virtual void updateInsertNode(AVLNode<V> *root){}
 		virtual void updateNodeValue(AVLNode<V> *node, V* tval);
@@ -121,10 +124,12 @@ namespace avl_tree
 
 		};
 
-		AVLNode<V>* mRoot;
 		AVLNode<V>* mMax;
 		AVLNode<V>* mMin;
 		int msize;
+
+	protected:
+		AVLNode<V>* mRoot;
 
 	public:
 		/*construct empty*/
@@ -676,12 +681,21 @@ void AVLTree<V, K>::display(AVLNode<V> *ptr, int level) const
 			cout << "        ";
 		//cout << *(ptr->mdata);
 		if (ptr->mdata)
-			cout << *(ptr->mdata) << "  ";
+			cout << nodeToString(*(ptr->mdata)) << "  ";
 		else
 			cout << "[NULL]  ";
 		display(ptr->left, level + 1);
 	}
 }
+template<typename V, typename K>
+std::string AVLTree<V, K>::nodeToString(const V& node) const
+{
+	std::stringstream ss;
+	ss << (K)node;
+	return ss.str();
+}
+
+
 template<typename V, typename K>
 void AVLTree<V, K>::display(int level) const
 {

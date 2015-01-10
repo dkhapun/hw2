@@ -83,7 +83,7 @@ StatusType Planet::JoinKingdoms(int city1, int city2)
 	}
 	catch (std::exception & e)
 	{
-		//e.what();
+		e.what();
 		return FAILURE;
 	}
 	return SUCCESS;

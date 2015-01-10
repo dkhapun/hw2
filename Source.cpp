@@ -47,12 +47,12 @@ void test_uf()
 
 	rtree.display(1);
 
-	cout << (int)*rtree.rank(1);
-	cout << (int)*rtree.rank(2);
-	cout << (int)*rtree.rank(3);
-	cout << (int)*rtree.rank(4);
-	cout << (int)*rtree.rank(5);
-	cout << (int)*rtree.rank(6);
+	cout << (int)*rtree.select(1);
+	cout << (int)*rtree.select(2);
+	cout << (int)*rtree.select(3);
+	cout << (int)*rtree.select(4);
+	cout << (int)*rtree.select(5);
+	cout << (int)*rtree.select(6);
 
 	
 }
