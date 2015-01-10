@@ -9,11 +9,13 @@
 void* Init(int n)
 {
 	/*check input*/
-	if(n < 2) return NULL;
+	Planet* p = 0;
+	if(n < 2) 
+		return NULL;
 	/*new*/
 	try
 	{
-		Planet* p = new Planet(n);
+		p = new Planet(n);
 	}
 	catch(...)
 	{
