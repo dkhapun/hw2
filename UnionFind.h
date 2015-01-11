@@ -213,7 +213,7 @@ void UnionFind<T>::unionOp(Group* groupA, Group* groupB)
 	//fix order based on element value and move root down if needed
 	UnionElement * bigE = bigG->getRoot();
 	UnionElement * smallE = smallG->getRoot();
-	if (*bigE->getValue() < *smallE->getValue())
+	if (*(bigE->getValue()) < *(smallE->getValue()))
 	{
 		bigG->setRoot(smallE);
 		bigE->setFather(smallE);

@@ -11,6 +11,7 @@ namespace avl_tree
 		RankNode() : value(0), rank(1){}
 		RankNode(T* v) : value(v), rank(1){}
 		//operator int() const { return value; }
+		bool operator<(RankNode<T> & node){return *value < *(node.value);}
 		operator T() { return *value; }
 		operator T() const{ return *value; }
 		T* value;
@@ -40,6 +41,8 @@ namespace avl_tree
 		virtual void updateRemoveNode(AVLNode<RankNode<T> > *root);
 		virtual void updateInsertNode(AVLNode<RankNode<T> > *root);
 		virtual void updateNodeValue(AVLNode<RankNode<T> > * node, T* tval);
+		int updateTreeRank(AVLNode<RankNode<T> >* node);
+
 		T* select(AVLNode<RankNode<T> >* node, int k);
 
 		virtual AVLNode<RankNode<T> > *rr_rotation(AVLNode<RankNode<T> > *n)
@@ -135,11 +138,19 @@ namespace avl_tree
 	}
 	
 	template<typename V>
-	RankTree<V>::RankTree(List<RankNode<V> >& list) : AVLTree < RankNode<V>, int>::AVLTree(list)
+	RankTree<V>::RankTree(List<RankNode<V> >& list) : AVLTree < RankNode<V>, V>::AVLTree(list)
 	{
-
+		updateTreeRank(this->mRoot);
 	}
 
+	template<typename V>
+	int RankTree<V>::updateTreeRank(AVLNode<RankNode<V> >* node)
+	{
+		if(node == 0)
+			return 0;
+		node->mdata->rank = updateTreeRank(node->left) + updateTreeRank(node->right) + 1;
+		return node->mdata->rank;
+	}
 	template<typename V>
 	void RankTree<V>::insert(V num)
 	{

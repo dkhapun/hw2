@@ -11,22 +11,17 @@ Planet::Planet(int in_n)
 {
 	n = in_n;
 	/*init tree*/
-//      /*create a list of cities*/
-//      List< RankNode<City> > tempList;
-//      for(int i=0; i<in_n; ++i)
-//      {
-//      	/*insert city with id = i*/
-//      	RankNode<City> node( new City(i) ); //this is bad
-//      	tempList.insert(tempList.end(), node);
-//      }
-//      /*init tree from the list*/
-//      citiesTree = avl_tree::RankTree<City>( tempList );
-
-	/*temp until above works*/
-	for(int i=0; i<in_n; ++i)
-	{
-		citiesTree.insert(City(i));
-	}
+      /*create a list of cities*/
+      List< RankNode<City> > tempList;
+      for(int i=0; i<in_n; ++i)
+      {
+    	/*insert city with id = i*/
+      	RankNode<City> node( new City(i) ); //this is bad
+      	tempList.insert(tempList.end(), node);
+      }
+      /*init tree from the list*/
+      citiesTree = avl_tree::RankTree<City>( tempList );
+      citiesTree.display(1);
 }
 
 /* Description:   Destruct

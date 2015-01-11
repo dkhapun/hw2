@@ -91,6 +91,7 @@ namespace avl_tree
 		virtual void updateRemoveNode(AVLNode<V> *root){}
 		virtual void updateInsertNode(AVLNode<V> *root){}
 		virtual void updateNodeValue(AVLNode<V> *node, V* tval);
+		virtual V* createNewNode(V& value);
 
 		virtual AVLNode<V> *rr_rotation(AVLNode<V> *);
 		virtual AVLNode<V> *ll_rotation(AVLNode<V> *);
@@ -267,12 +268,20 @@ AVLNode<V>* AVLTree<V, K>::createAlmostFullTree(int* pleafsToSkip, int levels, L
 	/*create left tree*/
 	pnode->left = createAlmostFullTree(pleafsToSkip, levels - 1, piter);
 	/*copy data from list and point to next*/
-	pnode->mdata = new V(**piter);
+	//pnode->mdata = new V(**piter);
+	pnode->mdata = createNewNode(**piter);
 	++(*piter);
 	/*create right tree*/
 	pnode->right = createAlmostFullTree(pleafsToSkip, levels - 1, piter);
 	return pnode;
 }
+
+template<typename V, typename K>
+V* AVLTree<V, K>::createNewNode(V& value)
+{
+	return new V(value);
+}
+
 
 template<typename V, typename K>
 AVLTree<V, K>::~AVLTree(void)
@@ -451,7 +460,7 @@ AVLNode<V> *AVLTree<V, K>::insert(AVLNode<V> *root, V value, AVLNode<V> **insert
 		updateInsertNode(root);
 		root = balance(root);
 	}
-	else if ((K) (value) >= (K) (*(root->mdata)))
+	else if ((K) (value) > (K) (*(root->mdata)))
 	{
 		if (((tmp = insert(root->right, value, inserted)) == 0))
 			return 0;
@@ -531,7 +540,7 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 {
 	if (root == NULL)
 	{
-		return root;
+		return 0;
 	}
 	AVLNode<V> * toremove = 0;
 	AVLNode<V> ** rootside = 0;
@@ -586,8 +595,10 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 		updateRemoveNode(root);
 		root = balance(root);
 		delete toremove;
+		msize--;
+		return 0;
 	}
-	return root;
+	return 0;
 }
 
 template<typename V, typename K>
@@ -640,14 +651,7 @@ void AVLTree<V, K>::remove(K value)
 	}
 	
 	updateMinMax();
-	if (cur != 0)
-	{
-		msize--;
-	}
-	else
-	{
-		throw std::logic_error("node not found");
-	}
+
 }
 
 template<typename V, typename K>

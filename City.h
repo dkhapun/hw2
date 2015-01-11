@@ -11,6 +11,7 @@ public:
 	int getId();
 	void changePopulation(int change);
 	~City();
+
 private:
 	int mPopulation;
 	int mId;

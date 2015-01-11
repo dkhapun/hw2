@@ -7,7 +7,6 @@ int main()
 {
 	union_and_tree_test();
 
-	//Planet p(100);
 	List<City> cities;
 	RankTree<City> tree;
 	RankTree<City> lsttree;
@@ -24,69 +23,44 @@ int main()
 			12, 16, 13, 15, 19,
 			11, 23, 24, 22, 27 };
 
-	for(int i=0; i<m; ++i)
-	{
-		assert(p.AddCitizen(id[i]) == SUCCESS);
-	}
-
-	for(int i=0; i<10; ++i)
-	{
-		tree.insert(City(i));
-		cities.insert(cities.begin(), City(i));
-	}
-	tree.display(1);
-	//RankTree<City> listree(cities);
-
-//      /*test AddCitizen*/
-//      /********************************/
-//      /*try to add citizen with invalid ID*/
-//      assert(p.AddCitizen(-1) == INVALID_INPUT);
-//      /*add some citizens*/
-//      int m = 20;
-//      int id[] = {0, 3, 64, 2, 7,
-//      		55, 6, 34, 65, 9,
-//      		12, 16, 13, 15, 19,
-//      		11, 23, 24, 22, 27 };
-//      for(int i=0; i<m; ++i)
-//      {
-//      	assert(p.AddCitizen(id[i]) == SUCCESS);
-//      }
-//      /*try to add some duplicate*/
-//      assert(p.AddCitizen(0) == FAILURE);
-//      assert(p.AddCitizen(64) == FAILURE);
-//      assert(p.AddCitizen(22) == FAILURE);
-//
-//      /*test MoveToCity*/
-//      /********************************/
-	/*try to add some duplicate*/
-	assert(p.AddCitizen(0) == FAILURE);
-	assert(p.AddCitizen(64) == FAILURE);
-	assert(p.AddCitizen(22) == FAILURE);
+    /*test AddCitizen*/
+    /********************************/
+    /*try to add citizen with invalid ID*/
+    assert(p.AddCitizen(-1) == INVALID_INPUT);
+    /*add some citizens*/
+    for(int i=0; i<m; ++i)
+    {
+    	assert(p.AddCitizen(id[i]) == SUCCESS);
+    }
+    /*try to add some duplicate*/
+    assert(p.AddCitizen(0) == FAILURE);
+    assert(p.AddCitizen(64) == FAILURE);
+    assert(p.AddCitizen(22) == FAILURE);
 
 	/*test MoveToCity*/
 	/********************************/
-//      /*try to move invalid id*/
-//      assert(p.MoveToCity(-1, 0) == INVALID_INPUT);
-//      /*try to move to invalid city*/
-//      assert(p.MoveToCity(0, -1) == INVALID_INPUT);
-//      assert(p.MoveToCity(0, 100) == INVALID_INPUT);
-//      /*try to move ids that dont exist*/
-//      assert(p.MoveToCity(1, 0) == FAILURE);
-//      assert(p.MoveToCity(4, 0) == FAILURE);
-//      /*move all citizens to some city*/
-//      int city[] = {0, 1, 2, 3, 4,
-//      		9, 8, 7, 6, 5,
-//      		10, 11, 12, 13, 14,
-//      		75, 23, 51, 29, 99 };
+    /*try to move invalid id*/
+    assert(p.MoveToCity(-1, 0) == INVALID_INPUT);
+    /*try to move to invalid city*/
+    assert(p.MoveToCity(0, -1) == INVALID_INPUT);
+    assert(p.MoveToCity(0, 100) == INVALID_INPUT);
+    /*try to move ids that dont exist*/
+    assert(p.MoveToCity(1, 0) == FAILURE);
+    assert(p.MoveToCity(4, 0) == FAILURE);
+    /*move all citizens to some city*/
+    int city[] = {0, 1, 2, 3, 4,
+      		9, 8, 7, 6, 5,
+      		10, 11, 12, 13, 14,
+      		75, 23, 51, 29, 99 };
 
-	//for(int i=0; i<m; ++i)
-//	{
-//cout << i << endl;
-	//	assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
-	//}
+	for(int i=0; i<m; ++i)
+	{
+cout << i << endl;
+		assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
+	}
 	/*try to move someone again*/
-	//assert(p.MoveToCity(0, 0) == FAILURE);
-	//assert(p.MoveToCity(3, 0) == FAILURE);
+	assert(p.MoveToCity(0, 0) == FAILURE);
+	assert(p.MoveToCity(3, 0) == FAILURE);
 
 	/*test JoinKingdoms*/
 	/********************************/
