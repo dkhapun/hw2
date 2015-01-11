@@ -4,11 +4,14 @@ class City
 public:
 	City(int in_id);
 	bool operator<(City& other);
+	bool operator>(City& other);
+	bool operator==(City& other);
 	operator int() const;
-	//void increase();
+
+	int getId();
 	void changePopulation(int change);
 	~City();
 private:
 	int mPopulation;
-	int id;
+	int mId;
 };

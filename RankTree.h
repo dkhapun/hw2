@@ -10,22 +10,24 @@ namespace avl_tree
 	public:
 		RankNode() : value(0), rank(1){}
 		RankNode(T* v) : value(v), rank(1){}
-		operator int() const { return (int)(*value); }
+		//operator int() const { return value; }
+		operator T() { return *value; }
+		operator T() const{ return *value; }
 		T* value;
 		int rank;
 
 		virtual ~RankNode()
 		{
-			delete value;
+			//delete value;
 		}
 	};
 
 	template<typename T>
-	class RankTree : public AVLTree < RankNode<T>, int>
+	class RankTree : public AVLTree < RankNode<T>, T>
 	{
 	public:
 		RankTree(List<RankNode<T> >& list);
-		RankTree() : AVLTree < RankNode<T>, int>::AVLTree(){}
+		RankTree() : AVLTree < RankNode<T>, T>::AVLTree(){}
 		virtual ~RankTree()
 		{
 
@@ -60,14 +62,14 @@ namespace avl_tree
 				if (n->left != 0)
 					al_rank = n->left->mdata->rank;
 			
-				n = AVLTree < RankNode<T>, int>::rr_rotation(n);
+				n = AVLTree < RankNode<T>, T>::rr_rotation(n);
 
 				n->mdata->rank = a_rank;
 				n->left->mdata->rank = 1 + bl_rank + al_rank;
 			}
 			else
 			{
-				n = AVLTree < RankNode<T>, int>::rr_rotation(n);
+				n = AVLTree < RankNode<T>, T>::rr_rotation(n);
 			}
 			return n;
 		}
@@ -90,14 +92,14 @@ namespace avl_tree
 				if(n->right != 0 )
 					br_rank = n->right->mdata->rank;
 
-				n = AVLTree < RankNode<T>, int>::ll_rotation(n);
+				n = AVLTree < RankNode<T>, T>::ll_rotation(n);
 
 				n->mdata->rank = b_rank;
 				n->right->mdata->rank = 1 + ar_rank + br_rank;
 			}
 			else
 			{
-				n = AVLTree < RankNode<T>, int>::ll_rotation(n);
+				n = AVLTree < RankNode<T>, T>::ll_rotation(n);
 			}
 			return n;
 		}
@@ -105,7 +107,7 @@ namespace avl_tree
 		{
 			int a_rank = n->mdata->rank;
 
-			n = AVLTree < RankNode<T>, int>::lr_rotation(n);
+			n = AVLTree < RankNode<T>, T>::lr_rotation(n);
 
 			n->mdata->rank = a_rank;
 			n->left->mdata->rank -= n->right->mdata->rank;
@@ -114,7 +116,7 @@ namespace avl_tree
 		virtual AVLNode<RankNode<T> > *rl_rotation(AVLNode<RankNode<T> > *n)
 		{
 			int a_rank = n->mdata->rank;
-			n = AVLTree < RankNode<T>, int>::rl_rotation(n);
+			n = AVLTree < RankNode<T>, T>::rl_rotation(n);
 			n->mdata->rank = a_rank;
 			n->right->mdata->rank -= n->left->mdata->rank;
 			return n;
@@ -141,7 +143,7 @@ namespace avl_tree
 	template<typename V>
 	void RankTree<V>::insert(V num)
 	{
-		AVLTree < RankNode<V>, int>::insert(RankNode<V>(new V(num)));
+		AVLTree < RankNode<V>, V>::insert(RankNode<V>(new V(num)));
 	}
 	template<typename V>
 	void RankTree<V>::updateNodeValue(AVLNode<RankNode<V> > * node, V* tval)

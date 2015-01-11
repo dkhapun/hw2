@@ -2,24 +2,40 @@
 #include "assert.h"
 
 using namespace avl_tree;
-
+void union_and_tree_test();
 int main()
 {
+	union_and_tree_test();
+
 	//Planet p(100);
 	List<City> cities;
 	RankTree<City> tree;
+	RankTree<City> lsttree;
+	Planet p(100);
+
+	/*test AddCitizen*/
+	/********************************/
+	/*try to add citizen with invalid ID*/
+	assert(p.AddCitizen(-1) == INVALID_INPUT);
+	/*add some citizens*/
+	int m = 20;
+	int id[] = {0, 3, 64, 2, 7,
+			55, 6, 34, 65, 9,
+			12, 16, 13, 15, 19,
+			11, 23, 24, 22, 27 };
+
+	for(int i=0; i<m; ++i)
+	{
+		assert(p.AddCitizen(id[i]) == SUCCESS);
+	}
+
 	for(int i=0; i<10; ++i)
 	{
 		tree.insert(City(i));
-
-	}
-	tree.display(1);
-
-	for(int i=0; i<10; ++i)
-	{
 		cities.insert(cities.begin(), City(i));
 	}
-	RankTree<City> listree(cities);
+	tree.display(1);
+	//RankTree<City> listree(cities);
 
 //      /*test AddCitizen*/
 //      /********************************/
@@ -42,6 +58,13 @@ int main()
 //
 //      /*test MoveToCity*/
 //      /********************************/
+	/*try to add some duplicate*/
+	assert(p.AddCitizen(0) == FAILURE);
+	assert(p.AddCitizen(64) == FAILURE);
+	assert(p.AddCitizen(22) == FAILURE);
+
+	/*test MoveToCity*/
+	/********************************/
 //      /*try to move invalid id*/
 //      assert(p.MoveToCity(-1, 0) == INVALID_INPUT);
 //      /*try to move to invalid city*/
@@ -56,15 +79,100 @@ int main()
 //      		10, 11, 12, 13, 14,
 //      		75, 23, 51, 29, 99 };
 
-//	for(int i=0; i<m; ++i)
+	//for(int i=0; i<m; ++i)
 //	{
 //cout << i << endl;
-//		assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
-//	}
+	//	assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
+	//}
 	/*try to move someone again*/
 	//assert(p.MoveToCity(0, 0) == FAILURE);
 	//assert(p.MoveToCity(3, 0) == FAILURE);
 
+	/*test JoinKingdoms*/
+	/********************************/
+	/*try with invalid city*/
+	assert(p.JoinKingdoms(-1, 0) == INVALID_INPUT);
+	assert(p.JoinKingdoms(100, 0) == INVALID_INPUT);
+	assert(p.JoinKingdoms(0, -1) == INVALID_INPUT);
+	assert(p.JoinKingdoms(0, 100) == INVALID_INPUT);
+	/*try with same city*/
+	assert(p.JoinKingdoms(0, 0) == FAILURE);
+	/*join some cities*/
+	int uni[] = {0, 1,
+			2, 3,
+			4, 5,
+			6, 7,
+			8, 9};
+	for(int i=0; i<(5*2); i+=2)
+	{
+		assert(p.JoinKingdoms(uni[i], uni[i+1]) == SUCCESS);
+	}
+	/*try to join using non capital*/
+	assert(p.JoinKingdoms(0, 1) == FAILURE);
+	assert(p.JoinKingdoms(0, 3) == FAILURE);
+	/*join some more*/
+	int uni2[] = {10, 11,
+			10, 12,
+			10, 13,
+			10, 14,
+			10, 15,
+			10, 16,
+			10, 17,
+			10, 18,
+			10, 19,
+
+			20, 21,
+			20, 22, 
+			20, 23, 
+			20, 24, 
+			20, 25, 
+			20, 26, 
+			20, 27, 
+			20, 28, 
+			20, 29,
+
+			10, 20};
+	for(int i=0; i<(17*2); i+=2)
+	{
+		assert(p.JoinKingdoms(uni2[i], uni2[i+1]) == SUCCESS);
+	}
+
+	/*test GetCapital*/
+	/********************************/
+	/*try with invalid input*/
+	int capi;
+	assert(p.GetCapital(-1, &capi) == INVALID_INPUT);
+	assert(p.GetCapital(0, NULL) == INVALID_INPUT);
+	/*try with unknown id*/
+	assert(p.GetCapital(123, &capi) == FAILURE);
+	/*try with a citizen without a city*/
+	assert(p.AddCitizen(123) == SUCCESS);
+	assert(p.GetCapital(123, &capi) == FAILURE);
+	/*get some capitals*/
+//      assert(p.GetCapital(0, &capi) == SUCCESS); assert(capi == 0);
+//      assert(p.GetCapital(55, &capi) == SUCCESS); assert(capi == 0);
+//      assert(p.GetCapital(12, &capi) == SUCCESS); assert(capi == 10);
+//      assert(p.GetCapital(11, &capi) == SUCCESS); assert(capi == 75);
+//      assert(p.GetCapital(9, &capi) == SUCCESS); assert(capi == 0);
+//      assert(p.GetCapital(23, &capi) == SUCCESS); assert(capi == 10);
+
+	/*test SelectCity*/
+	/********************************/
+	/*try with invalid input*/
+	int scity;
+	assert(p.SelectCity(-1, &scity) == INVALID_INPUT);
+	assert(p.SelectCity(0, NULL) == INVALID_INPUT);
+	/*select some*/
+	//assert(p.SelectCity(0, &scity) == SUCCESS);
+
+	/*test GetCitiesBySize*/
+	/********************************/
+	int allcities[100];
+	assert(p.GetCitiesBySize(allcities) == SUCCESS);
+	for(int i=0; i<100; ++i)
+	{
+		cout << allcities[i] << endl;
+	}
 	return 0;
 }
 
@@ -99,15 +207,15 @@ void union_and_tree_test()
 	cout << u.find(8) << endl;
 	cout << u.find(9) << endl;
 
-	RankTree<int> rtree;
-	rtree.insert(2);
-	rtree.insert(10);
-	rtree.insert(4);
-	rtree.insert(15);
-	rtree.insert(16);
-	rtree.insert(3);
-	rtree.insert(7);
-	rtree.insert(11);
+	RankTree<City> rtree;
+	rtree.insert(City(2));
+	rtree.insert(City(10));
+	rtree.insert(City(4));
+	rtree.insert(City(15));
+	rtree.insert(City(16));
+	rtree.insert(City(3));
+	rtree.insert(City(7));
+	rtree.insert(City(11));
 
 	rtree.display(1);
 
