@@ -2,10 +2,10 @@
 class City
 {
 public:
-	City(int id);
+	City(int in_id);
 	bool operator<(City& other);
-	operator int() { return mPopulation; }
-	void increase();
+	operator int() const;
+	//void increase();
 	void changePopulation(int change);
 	~City();
 private:

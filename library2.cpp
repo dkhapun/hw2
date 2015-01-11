@@ -36,6 +36,7 @@ void* Init(int n)
  */
 StatusType AddCitizen(void* DS, int citizenID)
 {
+	if(DS == NULL) return INVALID_INPUT;
 	Planet* p = (Planet*)DS;
 	return p->AddCitizen(citizenID);
 }
@@ -53,6 +54,7 @@ StatusType AddCitizen(void* DS, int citizenID)
  */
 StatusType   MoveToCity(void* DS, int citizenID, int city)
 {
+	if(DS == NULL) return INVALID_INPUT;
 	Planet* p = (Planet*)DS;
 	return p->MoveToCity(citizenID, city);
 }
@@ -71,6 +73,7 @@ StatusType   MoveToCity(void* DS, int citizenID, int city)
  */
 StatusType   JoinKingdoms(void* DS, int city1, int city2)
 {
+	if(DS == NULL) return INVALID_INPUT;
 	Planet* p = (Planet*)DS;
 	return p->JoinKingdoms(city1, city2);
 }
@@ -90,6 +93,7 @@ StatusType   JoinKingdoms(void* DS, int city1, int city2)
  */
 StatusType   GetCapital(void* DS, int citizenID, int* capital)
 {
+	if(DS == NULL) return INVALID_INPUT;
 	Planet* p = (Planet*)DS;
 	return p->GetCapital(citizenID, capital);
 }
@@ -105,6 +109,7 @@ StatusType   GetCapital(void* DS, int citizenID, int* capital)
  */
 StatusType   SelectCity(void* DS, int k, int* city)
 {
+	if(DS == NULL) return INVALID_INPUT;
 	Planet* p = (Planet*)DS;
 	return p->SelectCity(k, city);
 }
@@ -120,6 +125,7 @@ StatusType   SelectCity(void* DS, int k, int* city)
  */
 StatusType   GetCitiesBySize(void* DS, int results[])
 {
+	if(DS == NULL) return INVALID_INPUT;
 	Planet* p = (Planet*)DS;
 	return p->GetCitiesBySize(results);
 }
@@ -132,6 +138,7 @@ StatusType   GetCitiesBySize(void* DS, int results[])
  */
 void        Quit(void** DS)
 {
+	if(DS == NULL) return;
 	Planet* p = (Planet*)(*DS);
 	delete p;
 	*DS = NULL;

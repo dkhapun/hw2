@@ -1,11 +1,68 @@
 #include "Planet.h"
+#include "assert.h"
 
 using namespace avl_tree;
 
 int main()
 {
-	Planet p(100);
-	
+	//Planet p(100);
+	AVLTree<City, int> tree;
+	for(int i=0; i<10; ++i)
+	{
+		tree.insert(City(i));
+		tree.display(1);
+	}
+
+//      /*test AddCitizen*/
+//      /********************************/
+//      /*try to add citizen with invalid ID*/
+//      assert(p.AddCitizen(-1) == INVALID_INPUT);
+//      /*add some citizens*/
+//      int m = 20;
+//      int id[] = {0, 3, 64, 2, 7,
+//      		55, 6, 34, 65, 9,
+//      		12, 16, 13, 15, 19,
+//      		11, 23, 24, 22, 27 };
+//      for(int i=0; i<m; ++i)
+//      {
+//      	assert(p.AddCitizen(id[i]) == SUCCESS);
+//      }
+//      /*try to add some duplicate*/
+//      assert(p.AddCitizen(0) == FAILURE);
+//      assert(p.AddCitizen(64) == FAILURE);
+//      assert(p.AddCitizen(22) == FAILURE);
+//
+//      /*test MoveToCity*/
+//      /********************************/
+//      /*try to move invalid id*/
+//      assert(p.MoveToCity(-1, 0) == INVALID_INPUT);
+//      /*try to move to invalid city*/
+//      assert(p.MoveToCity(0, -1) == INVALID_INPUT);
+//      assert(p.MoveToCity(0, 100) == INVALID_INPUT);
+//      /*try to move ids that dont exist*/
+//      assert(p.MoveToCity(1, 0) == FAILURE);
+//      assert(p.MoveToCity(4, 0) == FAILURE);
+//      /*move all citizens to some city*/
+//      int city[] = {0, 1, 2, 3, 4,
+//      		9, 8, 7, 6, 5,
+//      		10, 11, 12, 13, 14,
+//      		75, 23, 51, 29, 99 };
+
+//	for(int i=0; i<m; ++i)
+//	{
+//cout << i << endl;
+//		assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
+//	}
+	/*try to move someone again*/
+	//assert(p.MoveToCity(0, 0) == FAILURE);
+	//assert(p.MoveToCity(3, 0) == FAILURE);
+
+	return 0;
+}
+
+//
+void union_and_tree_test()
+{
 	PlanetUnion u(10);
 	cout << u.find(6) << endl;
 	cout << u.find(3) << endl;
@@ -54,5 +111,5 @@ int main()
 	cout << endl << (int) *rtree.select(6);
 	cout << endl << (int) *rtree.select(7);
 	cout << endl << (int) *rtree.select(8);
-	return 0;
+
 }

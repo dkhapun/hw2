@@ -10,6 +10,23 @@ Planet::Planet(int in_n)
 :planetUnion(in_n)
 {
 	n = in_n;
+	/*init tree*/
+//      /*create a list of cities*/
+//      List< RankNode<City> > tempList;
+//      for(int i=0; i<in_n; ++i)
+//      {
+//      	/*insert city with id = i*/
+//      	RankNode<City> node( new City(i) ); //this is bad
+//      	tempList.insert(tempList.end(), node);
+//      }
+//      /*init tree from the list*/
+//      citiesTree = avl_tree::RankTree<City>( tempList );
+
+	/*temp until above works*/
+	for(int i=0; i<in_n; ++i)
+	{
+		citiesTree.insert(City(i));
+	}
 }
 
 /* Description:   Destruct
@@ -28,9 +45,10 @@ Planet::~Planet()
  */
 StatusType Planet::AddCitizen(int citizenID)
 {
-	if(!citizensTable.insert(0, citizenID))
+	if(citizenID < 0) return INVALID_INPUT;
+	if(!citizensTable.insert(-1, citizenID))
 	{
-		return FAILURE;
+		return FAILURE; //already exists
 	}
 	return SUCCESS;
 }
@@ -52,14 +70,19 @@ StatusType Planet::MoveToCity(int citizenID, int city)
 	/*find citizen*/
 	int* pcity;
 	if(!citizensTable.find(citizenID, &pcity)) return FAILURE; //citizen not found
-	if(*pcity != 0) return FAILURE; //already in a city
-	/*set city*/
+	if(*pcity != -1) return FAILURE; //already in a city
+	/*set city of citizen*/
 	*pcity = city;
-	/*check if need to update capital in the union find*/
-	//planetUnion.???
+	/*+1 to the city in union find, it might update the capital*/
+	planetUnion.updateCity(city, 1);
 	/*remove city from rank tree*/
-	//citiesTree.???
-	/*insert back with new size*/
+	RankNode<City>* pNode = citiesTree.find(city);
+	if(pNode == NULL) return FAILURE; //can't find city in tree
+	City cityCopy = *(pNode->value);
+	citiesTree.remove(city);
+	/*insert back with +1 citizens*/
+	cityCopy.changePopulation(1);
+	citiesTree.insert(cityCopy);
 	return SUCCESS;
 }
 

@@ -93,8 +93,9 @@ public:
 	 *                SUCCESS - Otherwise.
 	 */
 	StatusType   GetCitiesBySize(int results[]);
-
+#ifdef NDEBUG
 private:
+#endif
 	int n; //number of cities
 
 	HashTable<int> citizensTable;
