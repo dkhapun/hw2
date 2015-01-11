@@ -79,6 +79,7 @@ StatusType Planet::MoveToCity(int citizenID, int city)
 	RankNode<City>* pNode = citiesTree.find(city);
 	if(pNode == NULL) return FAILURE; //can't find city in tree
 	City cityCopy = *(pNode->value);
+cout << "here" << endl;
 	citiesTree.remove(city);
 	/*insert back with +1 citizens*/
 	cityCopy.changePopulation(1);
@@ -100,13 +101,14 @@ StatusType Planet::MoveToCity(int citizenID, int city)
  */
 StatusType Planet::JoinKingdoms(int city1, int city2)
 {
+	/*check input*/
+	if(city1<0 || city1>(n-1) || city2<0 || city2>(n-1)) return INVALID_INPUT;
 	try
 	{
 		this->planetUnion.unionByRootElement(city1, city2);
 	}
-	catch (std::exception & e)
+	catch(...)
 	{
-		e.what();
 		return FAILURE;
 	}
 	return SUCCESS;
@@ -127,10 +129,22 @@ StatusType Planet::JoinKingdoms(int city1, int city2)
  */
 StatusType Planet::GetCapital(int citizenID, int* capital)
 {
+	/*check input*/
+	if(citizenID<0 || capital == NULL) return INVALID_INPUT;
 	int* data = 0;
 	if (false == this->citizensTable.find(citizenID, &data))
 		return FAILURE;
-	int groupid = planetUnion.find(*data);
+	int groupid;
+	try
+	{
+
+		groupid = planetUnion.find(*data);
+	}
+	catch(...)
+	{
+if(citizenID == 0) cout << *data << endl;
+		return FAILURE;
+	}
 	*capital = planetUnion.getCapitalOfGroup(groupid);
 	return SUCCESS;
 }
@@ -146,9 +160,16 @@ StatusType Planet::GetCapital(int citizenID, int* capital)
  */
 StatusType Planet::SelectCity(int k, int* city)
 {
-	if (k < 0)
+	if (k < 0 || city == NULL)
 		return INVALID_INPUT;
-	*city = *(citiesTree.select(k));
+	try
+	{
+		*city = *(citiesTree.select(k));
+	}
+	catch(...)
+	{
+		return FAILURE;
+	}
 	if (city == 0)
 		return FAILURE;
 	return SUCCESS;
