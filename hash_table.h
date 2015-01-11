@@ -51,6 +51,7 @@ public:
 			{
 				os << a.key << ":" << a.data << endl;
 			}
+			return os;
 		}
 		#endif
 	};

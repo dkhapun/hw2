@@ -43,6 +43,7 @@ class Array
 		{
 			os << a.pdata_array[i];
 		}
+		return os;
 	}
 	#endif
 
