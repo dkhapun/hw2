@@ -13,6 +13,11 @@ namespace avl_tree
 		operator int() const { return (int)(*value); }
 		T* value;
 		int rank;
+
+		virtual ~RankNode()
+		{
+			delete value;
+		}
 	};
 
 	template<typename T>

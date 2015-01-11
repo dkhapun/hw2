@@ -6,7 +6,7 @@ using namespace avl_tree;
 int main()
 {
 	//Planet p(100);
-
+	List<City> cities;
 	RankTree<City> tree;
 	for(int i=0; i<10; ++i)
 	{
@@ -14,6 +14,12 @@ int main()
 
 	}
 	tree.display(1);
+
+	for(int i=0; i<10; ++i)
+	{
+		cities.insert(cities.begin(), City(i));
+	}
+	RankTree<City> listree(cities);
 
 //      /*test AddCitizen*/
 //      /********************************/
