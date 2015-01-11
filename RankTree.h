@@ -37,19 +37,20 @@ namespace avl_tree
 
 		virtual AVLNode<RankNode<T> > *rr_rotation(AVLNode<RankNode<T> > *n)
 		{
-			int a_rank  = 0;
-			int bl_rank = 0;
-			int br_rank = 0;
-			int al_rank = 0;
+
 
 			if (n->right != 0 && n->right->right != 0)
 			{
+				int a_rank  = 0;
+				int bl_rank = 0;
+				int al_rank = 0;
+
 				//b is root-> b is right of root
 				a_rank = n->mdata->rank;
 
 				if (n->right->left != 0)
 					bl_rank = n->right->left->mdata->rank;
-				br_rank = n->right->right->mdata->rank;
+
 
 				if (n->left != 0)
 					al_rank = n->left->mdata->rank;
@@ -67,15 +68,16 @@ namespace avl_tree
 		}
 		virtual AVLNode<RankNode<T> > *ll_rotation(AVLNode<RankNode<T> > *n)
 		{
-			int b_rank  = 0;
-			int al_rank = 0;
-			int ar_rank = 0;
-			int br_rank = 0;
+
 			if (n->left != 0 && n->left->left != 0)
 			{
+				int b_rank  = 0;
+				int ar_rank = 0;
+				int br_rank = 0;
+
 				//b is root-> b is right of root
 				b_rank = n->mdata->rank;
-				al_rank = n->left->left->mdata->rank;
+				//al_rank = n->left->left->mdata->rank;
 
 				if (n->left->right != 0)
 					ar_rank = n->left->right->mdata->rank;

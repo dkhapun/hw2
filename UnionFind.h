@@ -41,7 +41,6 @@ protected:
 	private:
 		int mId;
 		UnionElement* mFather;
-		UnionElement** mChildren;
 		Group* mGroup;
 		T* mValue;
 	};
@@ -216,10 +215,8 @@ void UnionFind<T>::unionOp(Group* groupA, Group* groupB)
 	UnionElement * smallE = smallG->getRoot();
 	if (*bigE->getValue() < *smallE->getValue())
 	{
-		UnionElement * temp = bigE;
 		bigG->setRoot(smallE);
 		bigE->setFather(smallE);
-			
 	}
 	fixElementOrder(smallG->getRoot(), bigG->getRoot());
 	smallG->setRoot(0);

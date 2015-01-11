@@ -149,17 +149,17 @@ namespace avl_tree
 * Node implementation
 *********************************************************/
 template<typename V>
-AVLNode<V>::AVLNode() : left(0), right(0)
+AVLNode<V>::AVLNode() : bf(0), left(0), right(0)
 {
 	mdata = 0;
 }
 template<typename V>
-AVLNode<V>::AVLNode(const V& data) : left(0), right(0)
+AVLNode<V>::AVLNode(const V& data) : bf(0), left(0), right(0)
 {
 	mdata = new V(data);
 }
 template<typename V>
-AVLNode<V>::AVLNode(const V& data, AVLNode *left, AVLNode *right) : left(left), right(right)
+AVLNode<V>::AVLNode(const V& data, AVLNode *left, AVLNode *right) : bf(0), left(left), right(right)
 {
 	mdata = new V(data);
 }
@@ -187,19 +187,19 @@ AVLNode<V>::~AVLNode()
 *********************************************************/
 
 template<typename V, typename K>
-AVLTree<V, K>::AVLTree(void) : mRoot(0), msize(0)
+AVLTree<V, K>::AVLTree(void) : mMax(0), mMin(0), msize(0), mRoot(0)
 {
 }
 
 template<typename V, typename K>
-AVLTree<V, K>::AVLTree(List<V>& list)
+AVLTree<V, K>::AVLTree(List<V>& list) : mMax(0), mMin(0), msize(0), mRoot(0)
 {
 	mRoot = createFromList(list);
 	updateMinMax();
 }
 
 template<typename V, typename K>
-AVLTree<V, K>::AVLTree(const AVLTree<V, K>& cpy)
+AVLTree<V, K>::AVLTree(const AVLTree<V, K>& cpy) : mMax(0), mMin(0), msize(0), mRoot(0)
 {
 	mRoot = createFromList(cpy.toList());
 	updateMinMax();
@@ -451,7 +451,7 @@ AVLNode<V> *AVLTree<V, K>::insert(AVLNode<V> *root, V value, AVLNode<V> **insert
 		updateInsertNode(root);
 		root = balance(root);
 	}
-	else if ((K) (value) > (K) (*(root->mdata)))
+	else if ((K) (value) >= (K) (*(root->mdata)))
 	{
 		if (((tmp = insert(root->right, value, inserted)) == 0))
 			return 0;
