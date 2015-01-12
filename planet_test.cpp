@@ -10,7 +10,7 @@ int main()
 	List<City> cities;
 	RankTree<City> tree;
 	RankTree<City> lsttree;
-	Planet p(100);
+	Planet p(10);
 
 	/*test AddCitizen*/
 	/********************************/

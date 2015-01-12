@@ -79,7 +79,10 @@ cout << "here" << endl;
 	citiesTree.remove(city);
 	/*insert back with +1 citizens*/
 	cityCopy.changePopulation(1);
+	cout << endl << "----------------" << endl;
 	citiesTree.insert(cityCopy);
+	citiesTree.display(1);
+	cout << endl << "----------------" << endl;
 	return SUCCESS;
 }
 

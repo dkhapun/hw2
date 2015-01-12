@@ -90,6 +90,7 @@ namespace avl_tree
 		virtual std::string nodeToString(const V& node) const;
 		virtual void updateRemoveNode(AVLNode<V> *root){}
 		virtual void updateInsertNode(AVLNode<V> *root){}
+		virtual void updateNode(AVLNode<V> *root){}
 		virtual void updateNodeValue(AVLNode<V> *node, V* tval);
 		virtual V* createNewNode(V& value);
 
@@ -579,7 +580,9 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 			remove(mRoot, (K)(*tval));
 			updateNodeValue(toremove, tval);
 			toremove->mdata = tval;
+			return 0;
 		}
+		updateNode(root);
 		return toremove;
 	}
 	else if ((K)(value) < (K)(*(root->mdata)))
@@ -590,9 +593,10 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 	{
 		toremove = remove(root->right, value);
 	}
+	updateNode(root);
 	if (toremove != 0)
 	{
-		updateRemoveNode(root);
+
 		root = balance(root);
 		delete toremove;
 		msize--;
@@ -615,6 +619,7 @@ void AVLTree<V, K>::remove(K value)
 	if (empty())
 		return;
 
+	int oldsize = msize;
 	AVLNode<V>* cur;
 
 	if ((K) (value) == (K) (*(mRoot->mdata)))
@@ -627,6 +632,7 @@ void AVLTree<V, K>::remove(K value)
 			cur->right = 0;
 			cur->left = 0;
 			delete cur;
+			msize--;
 		}
 		else if (mRoot->left == 0)
 		{
@@ -635,6 +641,7 @@ void AVLTree<V, K>::remove(K value)
 			cur->right = 0;
 			cur->left = 0;
 			delete cur;
+			msize--;
 		}
 		else
 		{
@@ -651,6 +658,8 @@ void AVLTree<V, K>::remove(K value)
 	}
 	
 	updateMinMax();
+	if(msize == oldsize)
+		throw std::logic_error("node not found");
 
 }
 

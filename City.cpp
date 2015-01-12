@@ -4,17 +4,17 @@ City::City(int in_id)
 	mId = in_id;
 	mPopulation = 0;
 }
-bool City::operator==(City& other)
+bool City::operator==(const City& other)
 {
 	return this->mId == other.mId;
 }
-bool City::operator<(City& other)
+bool City::operator<(const City& other)
 {
 	if(this->mPopulation == other.mPopulation)
 		return this->mId < other.mId;
 	return this->mPopulation < other.mPopulation;
 }
-bool City::operator>(City& other)
+bool City::operator>(const City& other)
 {
 	if(this->mPopulation == other.mPopulation)
 		return this->mId > other.mId;
