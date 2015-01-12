@@ -419,6 +419,10 @@ template<typename V, typename K>
 AVLNode<V> *AVLTree<V, K>::balance(AVLNode<V> *temp)
 {
 	AVLNode<V> *parent = temp;
+	if(temp == 0)
+	{
+		return temp;
+	}
 	int bal_factor = diff(temp);
 	if (bal_factor > 1)
 	{
@@ -588,16 +592,18 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 	else if ((K)(value) < (K)(*(root->mdata)))
 	{
 		toremove = remove(root->left, value);
+		root->left = balance(root->left);
 	}
 	else if ((K)(value) > (K)((*root->mdata)))
 	{
 		toremove = remove(root->right, value);
+		root->right = balance(root->right);
 	}
 	updateNode(root);
 	if (toremove != 0)
 	{
 
-		root = balance(root);
+
 		toremove->right = 0;
 		toremove->left = 0;
 		delete toremove;
