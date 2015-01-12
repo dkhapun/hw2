@@ -657,6 +657,14 @@ void AVLTree<V, K>::remove(K value)
 	else
 	{
 		cur = remove(mRoot, value);
+		if(cur != 0)
+		{
+			mRoot = balance(mRoot);
+			cur->right = 0;
+			cur->left = 0;
+			delete cur;
+			msize--;
+		}
 	}
 	
 	updateMinMax();
