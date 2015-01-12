@@ -598,6 +598,8 @@ AVLNode<V> *AVLTree<V, K>::remove(AVLNode<V> *root, K value)
 	{
 
 		root = balance(root);
+		toremove->right = 0;
+		toremove->left = 0;
 		delete toremove;
 		msize--;
 		return 0;
