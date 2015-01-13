@@ -76,8 +76,6 @@ StatusType Planet::MoveToCity(int citizenID, int city)
 	/*+1 to the city in union find, it might update the capital*/
 	planetUnion.updateCity(city, 1);
 
-	if(citizenID == 123)
-		citiesTree.display(1);
 	RankNode<City>* pNode = citiesTree.find(copyucity);
 	if(pNode == NULL) return FAILURE; //can't find city in tree
 	City cityCopy = *(pNode->value);
@@ -145,7 +143,6 @@ StatusType Planet::GetCapital(int citizenID, int* capital)
 	}
 	catch(...)
 	{
-if(citizenID == 0) cout << *data << endl;
 		return FAILURE;
 	}
 	*capital = planetUnion.getCapitalOfGroup(groupid);

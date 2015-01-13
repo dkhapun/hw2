@@ -149,10 +149,14 @@ cout << uni2[i] << " " << uni2[i+1] << endl;
       assert(p.SelectCity(98, &scity) == SUCCESS);  assert(scity == 75);
       assert(p.SelectCity(99, &scity) == SUCCESS);  assert(scity == 99);
 
+      assert(p.AddCitizen(234) == SUCCESS);
+      assert(p.MoveToCity(234, 0) == SUCCESS);
+      assert(p.SelectCity(99, &scity) == SUCCESS);  assert(scity == 0);
+
       /*test GetCitiesBySize*/
       /********************************/
       int allcities[100];
-      //assert(p.MoveToCity(123, 10) == SUCCESS);
+      assert(p.MoveToCity(123, 10) == SUCCESS);
       assert(p.GetCitiesBySize(allcities) == SUCCESS);
       for(int i=90; i<100; ++i)
       {
