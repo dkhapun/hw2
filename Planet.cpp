@@ -21,7 +21,6 @@ Planet::Planet(int in_n)
       }
       /*init tree from the list*/
       citiesTree = avl_tree::RankTree<City>( tempList );
-      citiesTree.display(1);
 }
 
 /* Description:   Destruct
