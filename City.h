@@ -3,9 +3,9 @@ class City
 {
 public:
 	City(int in_id);
-	bool operator<(City& other);
-	bool operator>(City& other);
-	bool operator==(City& other);
+	bool operator<(const City& other);
+	bool operator>(const City& other);
+	bool operator==(const City& other);
 	operator int() const;
 
 	int getId();
