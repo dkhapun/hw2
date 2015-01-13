@@ -104,7 +104,6 @@ int main()
 			20, 28,
 			20, 29,
 
-
 			10, 20};
 	for(int i=0; i<(19*2); i+=2)
 	{
@@ -136,14 +135,24 @@ cout << uni2[i] << " " << uni2[i+1] << endl;
 	/*try with invalid input*/
       int scity;
       assert(p.SelectCity(-1, &scity) == INVALID_INPUT);
+      assert(p.SelectCity(100, &scity) == INVALID_INPUT);
       assert(p.SelectCity(0, NULL) == INVALID_INPUT);
       /*select some*/
-      //assert(p.SelectCity(0, &scity) == SUCCESS);
+      assert(p.SelectCity(0, &scity) == SUCCESS);  assert(scity == 15);
+      assert(p.SelectCity(1, &scity) == SUCCESS);  assert(scity == 16);
+      assert(p.SelectCity(2, &scity) == SUCCESS);  assert(scity == 17);
+      assert(p.SelectCity(80, &scity) == SUCCESS); assert(scity == 0);
+      assert(p.SelectCity(81, &scity) == SUCCESS); assert(scity == 1);
+      assert(p.SelectCity(82, &scity) == SUCCESS); assert(scity == 2);
+      assert(p.SelectCity(83, &scity) == SUCCESS); assert(scity == 3);
+      assert(p.SelectCity(83, &scity) == SUCCESS); assert(scity == 3);
+      assert(p.SelectCity(98, &scity) == SUCCESS);  assert(scity == 75);
+      assert(p.SelectCity(99, &scity) == SUCCESS);  assert(scity == 99);
 
       /*test GetCitiesBySize*/
       /********************************/
       int allcities[100];
-      assert(p.MoveToCity(123, 10) == SUCCESS);
+      //assert(p.MoveToCity(123, 10) == SUCCESS);
       assert(p.GetCitiesBySize(allcities) == SUCCESS);
       for(int i=90; i<100; ++i)
       {

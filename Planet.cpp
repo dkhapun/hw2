@@ -154,11 +154,11 @@ if(citizenID == 0) cout << *data << endl;
  */
 StatusType Planet::SelectCity(int k, int* city)
 {
-	if (k < 0 || city == NULL)
+	if (k < 0 || k>(n-1) || city == NULL)
 		return INVALID_INPUT;
 	try
 	{
-		*city = citiesTree.select(k)->getId();
+		*city = citiesTree.select(k+1)->getId(); //1 based
 	}
 	catch(...)
 	{
