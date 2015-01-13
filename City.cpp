@@ -24,7 +24,7 @@ void City::changePopulation(int change)
 {
 	mPopulation += change;
 }
-int City::getId()
+int City::getId()const
 {
 	return mId;
 }
@@ -34,7 +34,10 @@ City::operator int() const
 	return mId;
 }
 
-
+int City::getPopulation()const
+{
+	return mPopulation;
+}
 //void City::increase()
 //{
 
@@ -42,4 +45,18 @@ City::operator int() const
 City::~City()
 {
 
+}
+
+CityIdSmaller::CityIdSmaller(int id) : City(id) { }
+bool CityIdSmaller::operator<(const City& other)
+{
+	if(this->getPopulation() == other.getPopulation())
+		return this->getId() > other.getId();
+	return this->getPopulation() < other.getPopulation();
+}
+bool CityIdSmaller::operator>(const City& other)
+{
+	if(this->getPopulation() == other.getPopulation())
+		return this->getId() < other.getId();
+	return this->getPopulation() > other.getPopulation();
 }

@@ -1,6 +1,6 @@
 #include "PlanetUnion.h"
 
-PlanetUnion::PlanetUnion(int citys) : UnionFind<City>(citys)
+PlanetUnion::PlanetUnion(int citys) : UnionFind<CityIdSmaller>(citys)
 {
 
 }

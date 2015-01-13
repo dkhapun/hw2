@@ -205,10 +205,10 @@ void UnionFind<T>::unionOp(Group* groupA, Group* groupB)
 		smallG = groupA;
 	}
 
-	bigG->setSize(bigG->getSize() + groupB->getSize());
+	bigG->setSize(bigG->getSize() + smallG->getSize());
 	smallG->setSize(0);
 	smallG->getRoot()->setGroup(0);
-	smallG->getRoot()->setFather(groupA->getRoot());
+	smallG->getRoot()->setFather(bigG->getRoot());
 
 	//fix order based on element value and move root down if needed
 	UnionElement * bigE = bigG->getRoot();

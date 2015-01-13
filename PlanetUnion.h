@@ -1,7 +1,7 @@
 #pragma once
 #include "City.h"
 #include "UnionFind.h"
-class PlanetUnion : public UnionFind<City>
+class PlanetUnion : public UnionFind<CityIdSmaller>
 {
 public:
 	PlanetUnion(int citys);

@@ -98,12 +98,12 @@ cout << i << endl;
 			20, 21,
 			20, 22, 
 			20, 23, 
-			20, 24, 
-			20, 25, 
-			20, 26, 
-			20, 27, 
-			20, 28, 
-			20, 29,
+			23, 24,
+			23, 25,
+			23, 26,
+			23, 27,
+			23, 28,
+			23, 29,
 
 			10, 20};
 	for(int i=0; i<(17*2); i+=2)
@@ -123,12 +123,12 @@ cout << i << endl;
 	assert(p.AddCitizen(123) == SUCCESS);
 	assert(p.GetCapital(123, &capi) == FAILURE);
 	/*get some capitals*/
-//      assert(p.GetCapital(0, &capi) == SUCCESS); assert(capi == 0);
-//      assert(p.GetCapital(55, &capi) == SUCCESS); assert(capi == 0);
-//      assert(p.GetCapital(12, &capi) == SUCCESS); assert(capi == 10);
-//      assert(p.GetCapital(11, &capi) == SUCCESS); assert(capi == 75);
-//      assert(p.GetCapital(9, &capi) == SUCCESS); assert(capi == 0);
-//      assert(p.GetCapital(23, &capi) == SUCCESS); assert(capi == 10);
+      assert(p.GetCapital(0, &capi) == SUCCESS); assert(capi == 0);
+      assert(p.GetCapital(55, &capi) == SUCCESS); assert(capi == 8);
+      assert(p.GetCapital(12, &capi) == SUCCESS); assert(capi == 10);
+      assert(p.GetCapital(11, &capi) == SUCCESS); assert(capi == 75);
+      assert(p.GetCapital(9, &capi) == SUCCESS); assert(capi == 0);
+      assert(p.GetCapital(23, &capi) == SUCCESS); assert(capi == 10);
 
 	/*test SelectCity*/
 	/********************************/
