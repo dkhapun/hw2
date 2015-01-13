@@ -73,19 +73,10 @@ StatusType Planet::MoveToCity(int citizenID, int city)
 	RankNode<City>* pNode = citiesTree.find(city);
 	if(pNode == NULL) return FAILURE; //can't find city in tree
 	City cityCopy = *(pNode->value);
-cout << "here" << endl;
-
-	cout << endl << "----------------" << endl;
 	citiesTree.remove(city);
-	citiesTree.display(1);
-	cout << endl << "----------------" << endl;
-
 	/*insert back with +1 citizens*/
 	cityCopy.changePopulation(1);
-	cout << endl << "----------------" << endl;
 	citiesTree.insert(cityCopy);
-	citiesTree.display(1);
-	cout << endl << "----------------" << endl;
 	return SUCCESS;
 }
 

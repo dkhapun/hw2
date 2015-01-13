@@ -55,7 +55,6 @@ int main()
 
 	for(int i=0; i<m; ++i)
 	{
-cout << i << endl;
 		assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
 	}
 	/*try to move someone again*/
@@ -65,51 +64,52 @@ cout << i << endl;
 	/*test JoinKingdoms*/
 	/********************************/
 	/*try with invalid city*/
-//      assert(p.JoinKingdoms(-1, 0) == INVALID_INPUT);
-//      assert(p.JoinKingdoms(100, 0) == INVALID_INPUT);
-//      assert(p.JoinKingdoms(0, -1) == INVALID_INPUT);
-//      assert(p.JoinKingdoms(0, 100) == INVALID_INPUT);
-//      /*try with same city*/
-//      assert(p.JoinKingdoms(0, 0) == FAILURE);
-//      /*join some cities*/
-//      int uni[] = {0, 1,
-//      		2, 3,
-//      		4, 5,
-//      		6, 7,
-//      		8, 9};
-//      for(int i=0; i<(5*2); i+=2)
-//      {
-//      	assert(p.JoinKingdoms(uni[i], uni[i+1]) == SUCCESS);
-//      }
-//      /*try to join using non capital*/
-//      assert(p.JoinKingdoms(0, 1) == FAILURE);
-//      assert(p.JoinKingdoms(0, 3) == FAILURE);
-//      /*join some more*/
-//      int uni2[] = {10, 11,
-//      		10, 12,
-//      		10, 13,
-//      		10, 14,
-//      		10, 15,
-//      		10, 16,
-//      		10, 17,
-//      		10, 18,
-//      		10, 19,
-//
-//      		20, 21,
-//      		20, 22,
-//      		20, 23,
-//      		20, 24,
-//      		20, 25,
-//      		20, 26,
-//      		20, 27,
-//      		20, 28,
-//      		20, 29,
-//
-//      		10, 20};
-//      for(int i=0; i<(17*2); i+=2)
-//      {
-//      	assert(p.JoinKingdoms(uni2[i], uni2[i+1]) == SUCCESS);
-//      }
+	assert(p.JoinKingdoms(-1, 0) == INVALID_INPUT);
+	assert(p.JoinKingdoms(100, 0) == INVALID_INPUT);
+	assert(p.JoinKingdoms(0, -1) == INVALID_INPUT);
+	assert(p.JoinKingdoms(0, 100) == INVALID_INPUT);
+	/*try with same city*/
+	assert(p.JoinKingdoms(0, 0) == FAILURE);
+	/*join some cities*/
+	int uni[] = {0, 1,
+			2, 3,
+			4, 5,
+			6, 7,
+			8, 9};
+	for(int i=0; i<(5*2); i+=2)
+	{
+		assert(p.JoinKingdoms(uni[i], uni[i+1]) == SUCCESS);
+	}
+	/*try to join using non capital*/
+	assert(p.JoinKingdoms(0, 1) == FAILURE);
+	assert(p.JoinKingdoms(0, 3) == FAILURE);
+	/*join some more*/
+	int uni2[] = {10, 11,
+			10, 12,
+			10, 13,
+			10, 14,
+			10, 15,
+			10, 16,
+			10, 17,
+			10, 18,
+			10, 19,
+
+			20, 21,
+			20, 22,
+			20, 23,
+			20, 24,
+			20, 25,
+			20, 26,
+			20, 27,
+			20, 28,
+			20, 29,
+
+			10, 20};
+	for(int i=0; i<(17*2); i+=2)
+	{
+cout << i << endl;
+		assert(p.JoinKingdoms(uni2[i], uni2[i+1]) == SUCCESS);
+	}
 
 	/*test GetCapital*/
 	/********************************/
