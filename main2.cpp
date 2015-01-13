@@ -1,5 +1,3 @@
-#ifdef deletemelater
-
 /***************************************************************************/
 /*                                                                         */
 /* 234218 Data DSs 1, Winter 2014-2015                                          */
@@ -114,7 +112,7 @@ string PrintIntArray(const int* arr, int size) {
 /* main                                                                    */
 /***************************************************************************/
 
-int mainnope(int argc, const char**argv) {
+int main(int argc, const char**argv) {
   char buffer[MAX_STRING_INPUT_SIZE];
   // Reading commands
   while ( fgets(buffer, MAX_STRING_INPUT_SIZE, stdin) != NULL ) {
@@ -350,8 +348,6 @@ static errorType OnQuit(void** DS, const char* const command) {
 
 #ifdef __cplusplus
 }
-#endif
-
 #endif
 
 

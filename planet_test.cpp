@@ -3,7 +3,7 @@
 
 using namespace avl_tree;
 void union_and_tree_test();
-int main()
+int mainnope()
 {
 
 	//List<City> cities;
