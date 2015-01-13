@@ -143,6 +143,7 @@ cout << uni2[i] << " " << uni2[i+1] << endl;
       /*test GetCitiesBySize*/
       /********************************/
       int allcities[100];
+
       assert(p.MoveToCity(123, 10) == SUCCESS);
       assert(p.GetCitiesBySize(allcities) == SUCCESS);
       for(int i=90; i<100; ++i)
