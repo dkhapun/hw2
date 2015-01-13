@@ -5,12 +5,12 @@ using namespace avl_tree;
 void union_and_tree_test();
 int main()
 {
-	union_and_tree_test();
 
-	List<City> cities;
-	RankTree<City> tree;
-	RankTree<City> lsttree;
+	//List<City> cities;
+	//RankTree<City> tree;
+	//RankTree<City> lsttree;
 	Planet p(100);
+      //citiesTree.display(1);
 
 	/*test AddCitizen*/
 	/********************************/
@@ -30,7 +30,7 @@ int main()
     /*add some citizens*/
     for(int i=0; i<m; ++i)
     {
-    	assert(p.AddCitizen(id[i]) == SUCCESS);
+	assert(p.AddCitizen(id[i]) == SUCCESS);
     }
     /*try to add some duplicate*/
     assert(p.AddCitizen(0) == FAILURE);
@@ -49,13 +49,12 @@ int main()
     assert(p.MoveToCity(4, 0) == FAILURE);
     /*move all citizens to some city*/
     int city[] = {0, 1, 2, 3, 4,
-      		9, 8, 7, 6, 5,
-      		10, 11, 12, 13, 14,
-      		75, 23, 51, 29, 99 };
+		9, 8, 7, 6, 5,
+		10, 11, 12, 13, 14,
+		75, 23, 51, 29, 99 };
 
 	for(int i=0; i<m; ++i)
 	{
-cout << i << endl;
 		assert(p.MoveToCity(id[i], city[i]) == SUCCESS);
 	}
 	/*try to move someone again*/
@@ -96,6 +95,7 @@ cout << i << endl;
 			10, 19,
 
 			20, 21,
+
 			20, 22, 
 			20, 23, 
 			23, 24,
@@ -105,23 +105,25 @@ cout << i << endl;
 			23, 28,
 			23, 29,
 
+
 			10, 20};
 	for(int i=0; i<(17*2); i+=2)
 	{
+cout << i << endl;
 		assert(p.JoinKingdoms(uni2[i], uni2[i+1]) == SUCCESS);
 	}
 
 	/*test GetCapital*/
 	/********************************/
 	/*try with invalid input*/
-	int capi;
-	assert(p.GetCapital(-1, &capi) == INVALID_INPUT);
-	assert(p.GetCapital(0, NULL) == INVALID_INPUT);
-	/*try with unknown id*/
-	assert(p.GetCapital(123, &capi) == FAILURE);
-	/*try with a citizen without a city*/
-	assert(p.AddCitizen(123) == SUCCESS);
-	assert(p.GetCapital(123, &capi) == FAILURE);
+      int capi;
+      assert(p.GetCapital(-1, &capi) == INVALID_INPUT);
+      assert(p.GetCapital(0, NULL) == INVALID_INPUT);
+      /*try with unknown id*/
+      assert(p.GetCapital(123, &capi) == FAILURE);
+      /*try with a citizen without a city*/
+      assert(p.AddCitizen(123) == SUCCESS);
+      assert(p.GetCapital(123, &capi) == FAILURE);
 	/*get some capitals*/
       assert(p.GetCapital(0, &capi) == SUCCESS); assert(capi == 0);
       assert(p.GetCapital(55, &capi) == SUCCESS); assert(capi == 8);
@@ -133,20 +135,20 @@ cout << i << endl;
 	/*test SelectCity*/
 	/********************************/
 	/*try with invalid input*/
-	int scity;
-	assert(p.SelectCity(-1, &scity) == INVALID_INPUT);
-	assert(p.SelectCity(0, NULL) == INVALID_INPUT);
-	/*select some*/
-	//assert(p.SelectCity(0, &scity) == SUCCESS);
+      int scity;
+      assert(p.SelectCity(-1, &scity) == INVALID_INPUT);
+      assert(p.SelectCity(0, NULL) == INVALID_INPUT);
+      /*select some*/
+      //assert(p.SelectCity(0, &scity) == SUCCESS);
 
-	/*test GetCitiesBySize*/
-	/********************************/
-	int allcities[100];
-	assert(p.GetCitiesBySize(allcities) == SUCCESS);
-	for(int i=0; i<100; ++i)
-	{
-		cout << allcities[i] << endl;
-	}
+      /*test GetCitiesBySize*/
+      /********************************/
+      int allcities[100];
+      assert(p.GetCitiesBySize(allcities) == SUCCESS);
+      for(int i=0; i<100; ++i)
+      {
+      	cout << allcities[i] << endl;
+      }
 	return 0;
 }
 
