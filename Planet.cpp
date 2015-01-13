@@ -67,14 +67,23 @@ StatusType Planet::MoveToCity(int citizenID, int city)
 	if(*pcity != -1) return FAILURE; //already in a city
 	/*set city of citizen*/
 	*pcity = city;
+
+	//get city from unionfind to get population
+	City *ucity = planetUnion.getCity(city);
+	if(!ucity)
+		return FAILURE;
+	City copyucity = *ucity;
 	/*+1 to the city in union find, it might update the capital*/
 	planetUnion.updateCity(city, 1);
-	/*remove city from rank tree*/
-	RankNode<City>* pNode = citiesTree.find(city);
-cout << "pNode: " << pNode <<endl;
+
+	if(citizenID == 123)
+		citiesTree.display(1);
+	RankNode<City>* pNode = citiesTree.find(copyucity);
 	if(pNode == NULL) return FAILURE; //can't find city in tree
 	City cityCopy = *(pNode->value);
-	citiesTree.remove(city);
+
+	/*remove city from rank tree*/
+	citiesTree.remove(copyucity);
 	/*insert back with +1 citizens*/
 	cityCopy.changePopulation(1);
 	citiesTree.insert(cityCopy);

@@ -11,6 +11,14 @@ PlanetUnion::~PlanetUnion()
 
 }
 
+City* PlanetUnion::getCity(int cityid)
+{
+	if (!inRange(cityid, 0, mSize))
+		throw std::invalid_argument("element id is out of range");
+
+	return mElements[cityid]->getValue();
+}
+
 void PlanetUnion::unionByRootElement(int elemA, int elemB)
 {
 	if (!inRange(elemA, 0, mSize) || !inRange(elemB, 0, mSize))
