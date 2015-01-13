@@ -51,7 +51,7 @@ int main()
     int city[] = {0, 1, 2, 3, 4,
 		9, 8, 7, 6, 5,
 		10, 11, 12, 13, 14,
-		75, 23, 51, 29, 99 };
+		75, 20, 51, 29, 99 };
 
 	for(int i=0; i<m; ++i)
 	{
@@ -95,21 +95,20 @@ int main()
 			10, 19,
 
 			20, 21,
-
 			20, 22, 
 			20, 23, 
-			23, 24,
-			23, 25,
-			23, 26,
-			23, 27,
-			23, 28,
-			23, 29,
+			20, 24,
+			20, 25,
+			20, 26,
+			20, 27,
+			20, 28,
+			20, 29,
 
 
 			10, 20};
-	for(int i=0; i<(17*2); i+=2)
+	for(int i=0; i<(19*2); i+=2)
 	{
-cout << i << endl;
+cout << uni2[i] << " " << uni2[i+1] << endl;
 		assert(p.JoinKingdoms(uni2[i], uni2[i+1]) == SUCCESS);
 	}
 
@@ -129,7 +128,7 @@ cout << i << endl;
       assert(p.GetCapital(55, &capi) == SUCCESS); assert(capi == 8);
       assert(p.GetCapital(12, &capi) == SUCCESS); assert(capi == 10);
       assert(p.GetCapital(11, &capi) == SUCCESS); assert(capi == 75);
-      assert(p.GetCapital(9, &capi) == SUCCESS); assert(capi == 0);
+      assert(p.GetCapital(9, &capi) == SUCCESS); assert(capi == 4);
       assert(p.GetCapital(23, &capi) == SUCCESS); assert(capi == 10);
 
 	/*test SelectCity*/
@@ -144,8 +143,9 @@ cout << i << endl;
       /*test GetCitiesBySize*/
       /********************************/
       int allcities[100];
+      assert(p.MoveToCity(123, 10) == SUCCESS);
       assert(p.GetCitiesBySize(allcities) == SUCCESS);
-      for(int i=0; i<100; ++i)
+      for(int i=90; i<100; ++i)
       {
       	cout << allcities[i] << endl;
       }

@@ -71,6 +71,7 @@ StatusType Planet::MoveToCity(int citizenID, int city)
 	planetUnion.updateCity(city, 1);
 	/*remove city from rank tree*/
 	RankNode<City>* pNode = citiesTree.find(city);
+cout << "pNode: " << pNode <<endl;
 	if(pNode == NULL) return FAILURE; //can't find city in tree
 	City cityCopy = *(pNode->value);
 	citiesTree.remove(city);
